@@ -4,7 +4,8 @@
   "description": "v3.js",
   "main": "built/index.js",
   "scripts": {
-    "test": "tsc && ava test --verbose"
+    "test": "tsc && ava test --verbose",
+    "lint": "tslint src/**/* --fix"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/jin5354/v3#readme",
   "devDependencies": {
-    "ava": "^1.0.0-beta.3"
+    "ava": "^1.0.0-beta.3",
+    "tslint": "^5.9.1",
+    "tslint-config-jin": "^1.0.2"
+  },
+  "dependencies": {
+    "typescript": "^2.8.1"
   }
 }

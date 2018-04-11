@@ -15,20 +15,6 @@ class Vector3 {
   }
 
   /**
-   * normalize 向量标准化
-   *
-   * @memberof Vector3
-   */
-  normalize(): void {
-    let norm: number = Vector3.getNorm(this)
-    if(norm) {
-      this.x = this.x / norm
-      this.y = this.y / norm
-      this.z = this.z / norm
-    }
-  }
-
-  /**
    * isEqual 判断两向量是否相等
    *
    * @static
@@ -133,7 +119,7 @@ class Vector3 {
    * @returns {number}
    * @memberof Vector3
    */
-  static getAngle(a: Vector3, b: Vector3): number{
+  static getAngle(a: Vector3, b: Vector3): number {
     return Math.acos(Vector3.innerProduct(a, b) / (Vector3.getNorm(a) * Vector3.getNorm(b)))
   }
 
@@ -149,6 +135,20 @@ class Vector3 {
    */
   static crossProduct(a: Vector3, b: Vector3): Vector3 {
     return new Vector3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x)
+  }
+
+  /**
+   * normalize 向量标准化
+   *
+   * @memberof Vector3
+   */
+  normalize(): void {
+    let norm: number = Vector3.getNorm(this)
+    if(norm) {
+      this.x = this.x / norm
+      this.y = this.y / norm
+      this.z = this.z / norm
+    }
   }
 }
 
