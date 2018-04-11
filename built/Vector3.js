@@ -106,7 +106,7 @@ var Vector3 = /** @class */ (function () {
      * @memberof Vector3
      */
     Vector3.getDistance = function (a, b) {
-        return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+        return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y) + (a.z - b.z) * (a.z - b.z));
     };
     /**
      * innerProduct 向量点乘

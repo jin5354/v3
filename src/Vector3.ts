@@ -107,7 +107,7 @@ class Vector3 {
    * @memberof Vector3
    */
   static getDistance(a: Vector3, b: Vector3): number {
-    return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
+    return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y) + (a.z - b.z) * (a.z - b.z))
   }
 
   /**

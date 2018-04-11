@@ -4,7 +4,7 @@
   "description": "v3.js",
   "main": "built/index.js",
   "scripts": {
-    "test": "tsc && ava test"
+    "test": "tsc && ava test --verbose"
   },
   "repository": {
     "type": "git",
