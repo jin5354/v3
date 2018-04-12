@@ -15,19 +15,6 @@ var Vector3 = /** @class */ (function () {
         this.z = z;
     }
     /**
-     * normalize 向量标准化
-     *
-     * @memberof Vector3
-     */
-    Vector3.prototype.normalize = function () {
-        var norm = Vector3.getNorm(this);
-        if (norm) {
-            this.x = this.x / norm;
-            this.y = this.y / norm;
-            this.z = this.z / norm;
-        }
-    };
-    /**
      * isEqual 判断两向量是否相等
      *
      * @static
@@ -145,6 +132,19 @@ var Vector3 = /** @class */ (function () {
      */
     Vector3.crossProduct = function (a, b) {
         return new Vector3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
+    };
+    /**
+     * normalize 向量标准化
+     *
+     * @memberof Vector3
+     */
+    Vector3.prototype.normalize = function () {
+        var norm = Vector3.getNorm(this);
+        if (norm) {
+            this.x = this.x / norm;
+            this.y = this.y / norm;
+            this.z = this.z / norm;
+        }
     };
     return Vector3;
 }());

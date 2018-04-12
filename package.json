@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "v3.js",
   "main": "built/index.js",
+  "types": "built/index.d.js",
   "scripts": {
-    "test": "tsc && ava test --verbose",
+    "test": "tsc -d && ava test --verbose",
     "lint": "tslint src/**/* --fix"
   },
   "repository": {
