@@ -25,6 +25,23 @@ class TransformMatrix {
     this.m32 = m32
     this.m33 = m33
   }
+
+  /**
+   * 置为单位矩阵
+   *
+   * @memberof TransformMatrix
+   */
+  identity() {
+    this.m11 = 1
+    this.m12 = 0
+    this.m13 = 0
+    this.m21 = 0
+    this.m22 = 1
+    this.m23 = 0
+    this.m31 = 0
+    this.m32 = 0
+    this.m33 = 1
+  }
 }
 
 export default TransformMatrix

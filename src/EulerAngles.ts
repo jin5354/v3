@@ -1,4 +1,5 @@
 import Quaternion from './Quaternion'
+import RotationMatrix from './RotationMatrix'
 import * as MathUtil from './MathUtil'
 
 /**
@@ -16,6 +17,33 @@ class EulerAngles {
     this.heading = heading
     this.picth = picth
     this.bank = bank
+  }
+
+  /**
+   * 从世界——物体旋转矩阵中提取欧拉角
+   *
+   * @static
+   * @param {RotationMatrix} m
+   * @memberof EulerAngles
+   */
+  static fromRotationMatrix(m: RotationMatrix) {
+    let heading: number
+    let picth: number
+    let bank: number
+
+    let sp = -m.m23
+
+    // 注意万向锁
+    if(Math.abs(sp) > 0.9999) {
+      picth = Math.PI / 2 * sp
+      bank = 0
+      heading = Math.atan2(-m.m31, m.m11)
+    }else {
+      picth = Math.asin(sp)
+      bank = Math.atan2(m.m21, m.m22)
+      heading = Math.atan2(m.m13, m.m33)
+    }
+
   }
 
   /**
