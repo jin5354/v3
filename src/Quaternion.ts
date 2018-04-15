@@ -7,10 +7,6 @@ import * as MathUtil from './MathUtil'
  * @class Quaternion
  */
 class Quaternion {
-  w: number = 0
-  x: number = 0
-  y: number = 0
-  z: number = 0
 
   /**
    * 单位四元数
@@ -20,69 +16,16 @@ class Quaternion {
    */
   static QuaternionIdentity = new Quaternion(1, 0, 0, 0)
 
-  constructor(w: number, x: number, y:number, z:number) {
+  w: number = 0
+  x: number = 0
+  y: number = 0
+  z: number = 0
+
+  constructor(w: number, x: number, y: number, z: number) {
     this.w = w
     this.x = x
     this.y = y
     this.z = z
-  }
-
-  /**
-   * 绕 X 轴旋转
-   *
-   * @param {number} theta
-   * @memberof Quaternion
-   */
-  setToRotateAboutX(theta: number): void {
-    this.w = Math.cos(theta / 2)
-    this.x = Math.sin(theta / 2)
-    this.y = 0
-    this.z = 0
-  }
-
-  /**
-   * 绕 Y 轴旋转
-   *
-   * @param {number} theta
-   * @memberof Quaternion
-   */
-  setToRotateAboutY(theta: number): void {
-    this.w = Math.cos(theta / 2)
-    this.x = 0
-    this.y = Math.sin(theta / 2)
-    this.z = 0
-  }
-
-  /**
-   * 绕 Z 轴旋转
-   *
-   * @param {number} theta
-   * @memberof Quaternion
-   */
-  setToRotateAboutZ(theta: number): void {
-    this.w = Math.cos(theta / 2)
-    this.x = 0
-    this.y = 0
-    this.z = Math.sin(theta / 2)
-  }
-
-  /**
-   * 绕指定轴旋转
-   *
-   * @param {Vector3} axis
-   * @param {number} theta
-   * @memberof Quaternion
-   */
-  setToRotateAboutAxis(axis: Vector3, theta: number): void {
-    // 旋转轴向量必须标准化
-    if(Vector3.getNorm(axis) - 1 >= 0.01) {
-      throw Error('构建四元数时，旋转轴向量必须标准化')
-    }
-
-    this.w = Math.cos(theta / 2)
-    this.x = Math.sin(theta / 2) * axis.x
-    this.y = Math.sin(theta / 2) * axis.y
-    this.z = Math.sin(theta / 2) * axis.z
   }
 
   /**
@@ -141,6 +84,64 @@ class Quaternion {
       let z = a.w * b.z + a.z * b.w + a.y * b.x - a.x * b.y
       return new Quaternion(w, x, y, z)
     })
+  }
+
+  /**
+   * 绕 X 轴旋转
+   *
+   * @param {number} theta
+   * @memberof Quaternion
+   */
+  setToRotateAboutX(theta: number): void {
+    this.w = Math.cos(theta / 2)
+    this.x = Math.sin(theta / 2)
+    this.y = 0
+    this.z = 0
+  }
+
+  /**
+   * 绕 Y 轴旋转
+   *
+   * @param {number} theta
+   * @memberof Quaternion
+   */
+  setToRotateAboutY(theta: number): void {
+    this.w = Math.cos(theta / 2)
+    this.x = 0
+    this.y = Math.sin(theta / 2)
+    this.z = 0
+  }
+
+  /**
+   * 绕 Z 轴旋转
+   *
+   * @param {number} theta
+   * @memberof Quaternion
+   */
+  setToRotateAboutZ(theta: number): void {
+    this.w = Math.cos(theta / 2)
+    this.x = 0
+    this.y = 0
+    this.z = Math.sin(theta / 2)
+  }
+
+  /**
+   * 绕指定轴旋转
+   *
+   * @param {Vector3} axis
+   * @param {number} theta
+   * @memberof Quaternion
+   */
+  setToRotateAboutAxis(axis: Vector3, theta: number): void {
+    // 旋转轴向量必须标准化
+    if(Vector3.getNorm(axis) - 1 >= 0.01) {
+      throw Error('构建四元数时，旋转轴向量必须标准化')
+    }
+
+    this.w = Math.cos(theta / 2)
+    this.x = Math.sin(theta / 2) * axis.x
+    this.y = Math.sin(theta / 2) * axis.y
+    this.z = Math.sin(theta / 2) * axis.z
   }
 
   /**

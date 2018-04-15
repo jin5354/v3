@@ -39,7 +39,7 @@ class EulerAngles {
       this.bank += Math.PI
     }
 
-    //检查万向锁(允许误差)
+    // 检查万向锁(允许误差)
     if(Math.abs(this.picth) > Math.PI / 2 - 0.0001) {
       // 万向锁中，要求所有绕垂直轴的旋转赋给 heading，bank 置空
       this.heading += this.bank
@@ -51,7 +51,6 @@ class EulerAngles {
 
     this.heading = MathUtil.wrapPi(this.heading)
   }
-
 
 }
 
