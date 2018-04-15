@@ -97,7 +97,7 @@ class Vector3 {
   }
 
   /**
-   * innerProduct 向量点乘
+   * dotProduct 向量点乘
    * 反应两向量相似程度
    *
    * @static
@@ -106,7 +106,7 @@ class Vector3 {
    * @returns {number}
    * @memberof Vector3
    */
-  static innerProduct(a: Vector3, b: Vector3): number {
+  static dotProduct(a: Vector3, b: Vector3): number {
     return a.x * b.x + a.y * b.y + a.z * b.z
   }
 
@@ -120,7 +120,7 @@ class Vector3 {
    * @memberof Vector3
    */
   static getAngle(a: Vector3, b: Vector3): number {
-    return Math.acos(Vector3.innerProduct(a, b) / (Vector3.getNorm(a) * Vector3.getNorm(b)))
+    return Math.acos(Vector3.dotProduct(a, b) / (Vector3.getNorm(a) * Vector3.getNorm(b)))
   }
 
   /**
