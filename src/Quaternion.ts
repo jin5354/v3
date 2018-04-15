@@ -65,6 +65,19 @@ class Quaternion {
   }
 
   /**
+   * 四元数点乘
+   *
+   * @static
+   * @param {Quaternion} a
+   * @param {Quaternion} b
+   * @returns {number}
+   * @memberof Quaternion
+   */
+  static dotProduct(a: Quaternion, b: Quaternion): number {
+    return a.w * b.w + a.x * b.x + a.y * b.y + a.z * b.z
+  }
+
+  /**
    * 四元数叉乘
    *
    * @static
@@ -84,6 +97,101 @@ class Quaternion {
       let z = a.w * b.z + a.z * b.w + a.y * b.x - a.x * b.y
       return new Quaternion(w, x, y, z)
     })
+  }
+
+  /**
+   * 标量乘
+   *
+   * @static
+   * @param {number} scalar
+   * @param {Quaternion} a
+   * @returns {Quaternion}
+   * @memberof Quaternion
+   */
+  static scalarMultiply(scalar: number, a: Quaternion): Quaternion {
+    return new Quaternion(scalar * a.w, scalar * a.x, scalar * a.y, scalar * a.z)
+  }
+
+  /**
+   * 四元数对数
+   *
+   * @static
+   * @param {Quaternion} a
+   * @returns {Quaternion}
+   * @memberof Quaternion
+   */
+  static log(a: Quaternion): Quaternion {
+    let theta: number = a.getRotationAngle()
+    return new Quaternion(0, theta / 2 * a.x, theta / 2 * a.y, theta / 2 * a.z)
+  }
+
+  /**
+   * 四元数求幂
+   *
+   * @static
+   * @param {Quaternion} a
+   * @param {number} exponent
+   * @returns {Quaternion}
+   * @memberof Quaternion
+   */
+  static pow(a: Quaternion, exponent: number): Quaternion {
+    if(Math.abs(a.w) > 0.999) {
+      return a
+    }
+    let alpha = MathUtil.safeAcos(a.w)
+    let newAlpha = alpha * exponent
+    let mult = Math.sin(newAlpha) / Math.sin(alpha)
+    return new Quaternion(Math.cos(alpha), a.x * mult, a.y * mult, a.z * mult)
+  }
+
+  /**
+   * 由四元数 a 到四元数 b 的角位移
+   *
+   * @param {Quaternion} a
+   * @param {Quaternion} b
+   * @returns {Quaternion}
+   * @memberof Quaternion
+   */
+  static getAngularDisplacement(a: Quaternion, b: Quaternion): Quaternion {
+    return Quaternion.crossProduct(Quaternion.getConjugate(a), b)
+  }
+
+  /**
+   * 四元数 slerp 插值
+   *
+   * @static
+   * @param {Quaternion} a
+   * @param {Quaternion} b
+   * @param {number} t
+   * @returns {Quaternion}
+   * @memberof Quaternion
+   */
+  static slerp(a: Quaternion, b: Quaternion, t: number): Quaternion {
+    let k0: number
+    let k1: number
+    let cosOmega: number = Quaternion.dotProduct(a, b)
+    // 反转，找最短弧度
+    if(cosOmega < 0) {
+      b = Quaternion.negate(b)
+      cosOmega = -cosOmega
+    }
+    // 夹角过小，当做平行线
+    if(cosOmega > 0.9999) {
+      k0 = 1 - t
+      k1 = t
+    }else {
+      let sinOmega = Math.sqrt(1 - cosOmega * cosOmega)
+      let omega = Math.atan2(sinOmega, cosOmega)
+      k0 = Math.sin((1 - t) * omega) / sinOmega
+      k1 = Math.sin(t * omega) / sinOmega
+    }
+
+    let w: number = a.w * k0 + b.w * k1
+    let x: number = a.x * k0 + b.x * k1
+    let y: number = a.y * k0 + b.y * k1
+    let z: number = a.z * k1 + b.z * k1
+
+    return new Quaternion(w, x, y, z)
   }
 
   /**
