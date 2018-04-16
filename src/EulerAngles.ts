@@ -26,7 +26,7 @@ class EulerAngles {
    * @param {RotationMatrix} m
    * @memberof EulerAngles
    */
-  static fromRotationMatrix(m: RotationMatrix) {
+  static fromRotationMatrix(m: RotationMatrix): EulerAngles {
     let heading: number
     let picth: number
     let bank: number
@@ -44,6 +44,57 @@ class EulerAngles {
       heading = Math.atan2(m.m13, m.m33)
     }
 
+    return new EulerAngles(heading, picth, bank)
+  }
+
+  /**
+   * 物体——世界四元数转换为欧拉角
+   *
+   * @static
+   * @param {Quaternion} q
+   * @returns {EulerAngles}
+   * @memberof EulerAngles
+   */
+  static fromObjectToWorldQuaternion(q: Quaternion): EulerAngles {
+    let heading: number
+    let picth: number
+    let bank: number
+
+    let sp: number = -2 * (q.y * q.z - q.w * q.x)
+
+    // 注意万向锁
+    if(Math.abs(sp) > 0.9999) {
+      picth = Math.PI / 2 * sp
+      bank = 0
+      heading = Math.atan2(-q.x * q.z + q.w * q.y, 0.5 - q.y * q.y - q.z * q.z)
+    }else {
+      picth = Math.asin(sp)
+      heading = Math.atan2(q.x * q.z + q.w * q.y, 0.5 - q.x * q.x - q.y * q.y)
+      bank = Math.atan2(q.x * q.y + q.w * q.z, 0.5 - q.x * q.x - q.z * q.z)
+    }
+
+    return new EulerAngles(heading, picth, bank)
+  }
+
+  static fromWorldToObjectQuaternion(q: Quaternion): EulerAngles {
+    let heading: number
+    let picth: number
+    let bank: number
+
+    let sp: number = -2 * (q.y * q.z + q.w * q.x)
+
+    // 注意万向锁
+    if(Math.abs(sp) > 0.9999) {
+      picth = Math.PI / 2 * sp
+      bank = 0
+      heading = Math.atan2(-q.x * q.z - q.w * q.y, 0.5 - q.y * q.y - q.z * q.z)
+    }else {
+      picth = Math.asin(sp)
+      heading = Math.atan2(q.x * q.z - q.w * q.y, 0.5 - q.x * q.x - q.y * q.y)
+      bank = Math.atan2(q.x * q.y - q.w * q.z, 0.5 - q.x * q.x - q.z * q.z)
+    }
+
+    return new EulerAngles(heading, picth, bank)
   }
 
   /**

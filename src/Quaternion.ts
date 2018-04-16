@@ -1,4 +1,6 @@
 import Vector3 from './Vector3'
+import RotationMatrix from './RotationMatrix'
+import EulerAngles from './EulerAngles'
 import * as MathUtil from './MathUtil'
 
 /**
@@ -192,6 +194,114 @@ class Quaternion {
     let z: number = a.z * k1 + b.z * k1
 
     return new Quaternion(w, x, y, z)
+  }
+
+  /**
+   * 从旋转矩阵提取四元数
+   *
+   * @static
+   * @param {RotationMatrix} m
+   * @returns {Quaternion}
+   * @memberof Quaternion
+   */
+  static fromRotationMatrix(m: RotationMatrix): Quaternion {
+    let w: number = 0
+    let x: number = 0
+    let y: number = 0
+    let z: number = 0
+
+    let fourWSquaredMinus1: number = m.m11 + m.m22 + m.m33
+    let fourXSquaredMinus1: number = m.m11 - m.m22 - m.m33
+    let fourYSquaredMinus1: number = m.m22 - m.m11 - m.m33
+    let fourZSquaredMinus1: number = m.m33 - m.m11 - m.m22
+
+    let biggestIndex: number = 0
+
+    let fourBiggestSquaredMinus1: number = fourWSquaredMinus1
+    if(fourXSquaredMinus1 > fourBiggestSquaredMinus1) {
+      fourBiggestSquaredMinus1 = fourXSquaredMinus1
+      biggestIndex = 1
+    }
+    if(fourYSquaredMinus1 > fourBiggestSquaredMinus1) {
+      fourBiggestSquaredMinus1 = fourYSquaredMinus1
+      biggestIndex = 2
+    }
+    if(fourZSquaredMinus1 > fourBiggestSquaredMinus1) {
+      fourBiggestSquaredMinus1 = fourZSquaredMinus1
+      biggestIndex = 3
+    }
+
+    let biggestVal: number = Math.sqrt(fourBiggestSquaredMinus1 + 1) * 0.5
+    let mult: number = 0.25 / biggestVal
+
+    switch(biggestIndex) {
+      case(0): {
+        w = biggestVal
+        x = (m.m23 - m.m32) * mult
+        y = (m.m31 - m.m13) * mult
+        z = (m.m12 - m.m21) * mult
+        break
+      }
+      case(1): {
+        w = biggestVal
+        x = (m.m23 - m.m32) * mult
+        y = (m.m12 + m.m21) * mult
+        z = (m.m31 + m.m13) * mult
+        break
+      }
+      case(2): {
+        w = biggestVal
+        x = (m.m31 - m.m13) * mult
+        y = (m.m12 + m.m21) * mult
+        z = (m.m23 + m.m32) * mult
+        break
+      }
+      case(3): {
+        w = biggestVal
+        x = (m.m12 - m.m21) * mult
+        y = (m.m31 + m.m13) * mult
+        z = (m.m23 + m.m13) * mult
+        break
+      }
+    }
+
+    return new Quaternion(w, x, y, z)
+  }
+
+  /**
+   * 从欧拉角构建物体——世界四元数
+   *
+   * @static
+   * @param {EulerAngles} orientation
+   * @returns {Quaternion}
+   * @memberof Quaternion
+   */
+  static setObjectToWorldFromEulerAngles(orientation: EulerAngles): Quaternion {
+    let sinHOver2 = Math.sin(orientation.heading / 2)
+    let cosHOver2 = Math.cos(orientation.heading / 2)
+    let sinPOver2 = Math.sin(orientation.picth / 2)
+    let cosPOver2 = Math.cos(orientation.picth / 2)
+    let sinBOver2 = Math.sin(orientation.bank / 2)
+    let cosBOver2 = Math.cos(orientation.bank / 2)
+
+    return new Quaternion(
+      cosHOver2 * cosPOver2 * cosBOver2 + sinHOver2 * sinPOver2 * sinBOver2,
+      cosHOver2 * sinPOver2 * cosBOver2 + sinHOver2 * cosPOver2 * sinBOver2,
+      -cosHOver2 * sinPOver2 * sinBOver2 + sinHOver2 * cosPOver2 * cosBOver2,
+      -sinHOver2 * sinPOver2 * cosBOver2 + cosHOver2 * cosPOver2 * sinBOver2
+    )
+  }
+
+  /**
+   * 从欧拉角构建世界——物体四元数
+   *
+   * @static
+   * @param {EulerAngles} orientation
+   * @returns {Quaternion}
+   * @memberof Quaternion
+   */
+  static setWorldToObjectFromEulerAngles(orientation: EulerAngles): Quaternion {
+    return Quaternion.getConjugate(Quaternion.setObjectToWorldFromEulerAngles(orientation))
   }
 
   /**
