@@ -1,4 +1,4 @@
-import TransformMatrix from './TransformMatrix'
+import Matrix4x3 from './Matrix4x3'
 import EulerAngles from './EulerAngles'
 import Quaternion from './Quaternion'
 import * as MathUtil from './MathUtil'
@@ -8,7 +8,7 @@ import * as MathUtil from './MathUtil'
  *
  * @class RotationMatrix
  */
-class RotationMatrix extends TransformMatrix {
+class RotationMatrix extends Matrix4x3 {
   m11: number = 0
   m12: number = 0
   m13: number = 0
@@ -20,7 +20,7 @@ class RotationMatrix extends TransformMatrix {
   m33: number = 0
 
   constructor(m11: number, m12: number, m13: number, m21: number, m22: number, m23: number, m31: number, m32: number, m33: number) {
-    super(m11, m12, m13, m21, m22, m23, m31, m32, m33)
+    super(m11, m12, m13, m21, m22, m23, m31, m32, m33, 0, 0, 0)
   }
 
   /**
@@ -31,7 +31,7 @@ class RotationMatrix extends TransformMatrix {
    * @returns {RotationMatrix}
    * @memberof RotationMatrix
    */
-  static setup(orientation: EulerAngles): RotationMatrix {
+  static fromEulerAngle(orientation: EulerAngles): RotationMatrix {
     let sinH = Math.sin(orientation.heading)
     let cosH = Math.cos(orientation.heading)
     let sinP = Math.sin(orientation.picth)
