@@ -252,7 +252,7 @@ class Matrix4x3 {
   }
 
   /**
-   * 设置缩放
+   * 沿坐标轴缩放
    *
    * @param {Vector3} v
    * @memberof Matrix4x3
@@ -272,11 +272,82 @@ class Matrix4x3 {
     this.tz = 0
   }
 
+  /**
+   * 沿任意轴缩放
+   *
+   * @param {Vector3} axis
+   * @param {number} k
+   * @memberof Matrix4x3
+   */
   setupScaleAlongAxis(axis: Vector3, k: number): void {
     if(Math.abs(Vector3.getNorm(axis) - 1) > 0.01) {
       throw Error('旋转轴向量应为单位向量!')
     }
+
+    let a = k - 1
+    let ax = a * axis.x
+    let ay = a * axis.y
+    let az = a * axis.z
+
+    this.m11 = ax * axis.x + 1
+    this.m22 = ay * axis.y + 1
+    this.m33 = az * axis.z + 1
+    this.m12 = this.m21 = ax * axis.y
+    this.m13 = this.m31 = ax * axis.z
+    this.m23 = this.m32 = ay * axis.z
+    this.tx = this.ty = this.tz = 0
   }
+
+  /**
+   * 设置切变
+   *
+   * @param {string} axis
+   * @param {number} s
+   * @param {number} t
+   * @memberof Matrix4x3
+   */
+  setupShear(axis: string, s: number, t: number): void {
+    switch(axis) {
+      case('x'): {
+        this.m11 = 1
+        this.m12 = 0
+        this.m13 = 0
+        this.m21 = 0
+        this.m22 = 1
+        this.m23 = 0
+        this.m31 = s
+        this.m32 = t
+        this.m33 = 1
+        break
+      }
+      case('y'): {
+        this.m11 = 1
+        this.m12 = 0
+        this.m13 = 0
+        this.m21 = s
+        this.m22 = 1
+        this.m23 = t
+        this.m31 = 0
+        this.m32 = 0
+        this.m33 = 1
+        break
+      }
+      case('z'): {
+        this.m11 = 1
+        this.m12 = s
+        this.m13 = t
+        this.m21 = 0
+        this.m22 = 1
+        this.m23 = 0
+        this.m31 = 0
+        this.m32 = 0
+        this.m33 = 1
+        break
+      }
+    }
+    this.tx = this.ty = this.tx = 0
+  }
+
 }
 
 export default Matrix4x3
