@@ -129,14 +129,154 @@ class Matrix4x3 {
     this.tz = pos.z
   }
 
+  /**
+   * 构造世界——物体变换矩阵，物体位置和方位在世界中描述
+   *
+   * @param {Vector3} pos
+   * @param {EulerAngles} orientation
+   * @memberof Matrix4x3
+   */
   setupParentToLocalFromEulerAngle(pos: Vector3, orientation: EulerAngles): void {
-
+    let orientationMatrix = RotationMatrix.fromEulerAngle(orientation)
+    this.setupParentToLocalFromRotationMatrix(pos, orientationMatrix)
   }
 
+  /**
+   * 构造世界——物体变换矩阵，物体位置和方位在世界中描述
+   *
+   * @param {Vector3} pos
+   * @param {RotationMatrix} orientation
+   * @memberof Matrix4x3
+   */
   setupParentToLocalFromRotationMatrix(pos: Vector3, orientation: RotationMatrix): void {
-
+    this.m11 = orientation.m11
+    this.m12 = orientation.m12
+    this.m13 = orientation.m13
+    this.m21 = orientation.m21
+    this.m22 = orientation.m22
+    this.m23 = orientation.m23
+    this.m31 = orientation.m31
+    this.m32 = orientation.m32
+    this.m33 = orientation.m33
+    this.tx = -(pos.x * this.m11 + pos.y * this.m21 + pos.z * this.m31)
+    this.ty = -(pos.x * this.m12 + pos.y * this.m22 + pos.z * this.m32)
+    this.tz = -(pos.x * this.m13 + pos.y * this.m23 + pos.z * this.m33)
   }
 
+  /**
+   * 绕坐标轴旋转
+   *
+   * @param {string} axis
+   * @param {number} theta
+   * @memberof Matrix4x3
+   */
+  setupRotateFromXYZAxis(axis: string, theta: number): void {
+    let sin: number = Math.sin(theta)
+    let cos: number = Math.cos(theta)
+
+    switch(axis) {
+      case('x'): {
+        this.m11 = 1
+        this.m12 = 0
+        this.m13 = 0
+        this.m21 = 0
+        this.m22 = cos
+        this.m23 = sin
+        this.m31 = 0
+        this.m32 = -sin
+        this.m33 = cos
+        break
+      }
+      case('y'): {
+        this.m11 = cos
+        this.m12 = 0
+        this.m13 = -sin
+        this.m21 = 0
+        this.m22 = 1
+        this.m23 = 0
+        this.m31 = sin
+        this.m32 = 0
+        this.m33 = cos
+        break
+      }
+      case('z'): {
+        this.m11 = cos
+        this.m12 = sin
+        this.m13 = 0
+        this.m21 = -sin
+        this.m22 = cos
+        this.m23 = 0
+        this.m31 = 0
+        this.m32 = 0
+        this.m33 = 1
+        break
+      }
+    }
+
+    this.tx = 0
+    this.ty = 0
+    this.tz = 0
+  }
+
+  /**
+   * 绕特定轴旋转
+   *
+   * @param {Vector3} axis
+   * @param {number} theta
+   * @memberof Matrix4x3
+   */
+  setupRotateFromVector3(axis: Vector3, theta: number): void {
+    if(Math.abs(Vector3.getNorm(axis) - 1) > 0.01) {
+      throw Error('旋转轴向量应为单位向量!')
+    }
+
+    let sin: number = Math.sin(theta)
+    let cos: number = Math.cos(theta)
+    let a: number = 1 - cos
+    let ax: number = a * axis.x
+    let ay: number = a * axis.y
+    let az: number = a * axis.z
+
+    this.m11 = ax * axis.x + cos
+    this.m12 = ax * axis.y + axis.z * sin
+    this.m13 = ax * axis.z - axis.y * sin
+    this.m21 = ay * axis.x - axis.z * sin
+    this.m22 = ay * axis.y + cos
+    this.m23 = ay * axis.z + axis.x * sin
+    this.m31 = az * axis.x + axis.y * sin
+    this.m32 = az * axis.y - axis.x * sin
+    this.m33 = az * axis.z + cos
+    this.tx = 0
+    this.ty = 0
+    this.tz = 0
+  }
+
+  /**
+   * 设置缩放
+   *
+   * @param {Vector3} v
+   * @memberof Matrix4x3
+   */
+  setupScale(v: Vector3): void {
+    this.m11 = v.x
+    this.m12 = 0
+    this.m13 = 0
+    this.m21 = 0
+    this.m22 = v.y
+    this.m23 = 0
+    this.m31 = 0
+    this.m32 = 0
+    this.m33 = v.z
+    this.tx = 0
+    this.ty = 0
+    this.tz = 0
+  }
+
+  setupScaleAlongAxis(axis: Vector3, k: number): void {
+    if(Math.abs(Vector3.getNorm(axis) - 1) > 0.01) {
+      throw Error('旋转轴向量应为单位向量!')
+    }
+  }
 }
 
 export default Matrix4x3
