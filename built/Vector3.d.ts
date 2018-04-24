@@ -66,7 +66,7 @@ declare class Vector3 {
      */
     static getDistance(a: Vector3, b: Vector3): number;
     /**
-     * innerProduct 向量点乘
+     * dotProduct 向量点乘
      * 反应两向量相似程度
      *
      * @static
@@ -75,7 +75,7 @@ declare class Vector3 {
      * @returns {number}
      * @memberof Vector3
      */
-    static innerProduct(a: Vector3, b: Vector3): number;
+    static dotProduct(a: Vector3, b: Vector3): number;
     /**
      * getAngle 求两向量夹角
      *
