@@ -44,6 +44,53 @@ class Matrix4x3 {
   }
 
   /**
+   * Vector3 乘 Matrix4x3
+   *
+   * @static
+   * @param {Vector3} v
+   * @param {Matrix4x3} m
+   * @returns {Vector3}
+   * @memberof Matrix4x3
+   */
+  static vector3Multiply(v: Vector3, m: Matrix4x3): Vector3 {
+    return new Vector3(
+      v.x * m.m11 + v.y * m.m21 + v.z * m.m31 + m.tx,
+      v.x * m.m12 + v.y * m.m22 + v.z * m.m32 + m.tx,
+      v.x * m.m13 + v.y * m.m23 + v.z * m.m33 + m.tx
+    )
+  }
+
+  /**
+   * 矩阵叉乘
+   *
+   * @static
+   * @param {...Matrix4x3[]} args
+   * @returns {Matrix4x3}
+   * @memberof Matrix4x3
+   */
+  static matrix4x3Multiply(...args: Matrix4x3[]): Matrix4x3 {
+    if(args.length < 2) {
+      throw Error('矩阵叉乘至少需要两个参数')
+    }
+    return args.reduce((a: Matrix4x3, b: Matrix4x3): Matrix4x3 => {
+      return new Matrix4x3(
+        a.m11 * b.m11 + a.m12 * b.m21 + a.m13 * b.m31,
+        a.m11 * b.m12 + a.m12 * b.m22 + a.m13 * b.m32,
+        a.m11 * b.m13 + a.m12 * b.m23 + a.m13 * b.m33,
+        a.m21 * b.m11 + a.m22 * b.m21 + a.m23 * b.m31,
+        a.m21 * b.m12 + a.m22 * b.m22 + a.m23 * b.m32,
+        a.m21 * b.m13 + a.m22 * b.m23 + a.m23 * b.m33,
+        a.m31 * b.m11 + a.m32 * b.m21 + a.m33 * b.m31,
+        a.m31 * b.m12 + a.m32 * b.m22 + a.m33 * b.m32,
+        a.m31 * b.m13 + a.m32 * b.m23 + a.m33 * b.m33,
+        a.tx * b.m11 + a.ty * b.m21 + a.tz * b.m31 + b.tx,
+        a.tx * b.m12 + a.ty * b.m22 + a.tz * b.m32 + b.ty,
+        a.tx * b.m13 + a.ty * b.m23 + a.tz * b.m33 + b.tz
+      )
+    })
+  }
+
+  /**
    * 置为单位矩阵
    *
    * @memberof Matrix4x3
@@ -279,7 +326,7 @@ class Matrix4x3 {
    * @param {number} k
    * @memberof Matrix4x3
    */
-  setupScaleAlongAxis(axis: Vector3, k: number): void {
+  setupScaleFromAxis(axis: Vector3, k: number): void {
     if(Math.abs(Vector3.getNorm(axis) - 1) > 0.01) {
       throw Error('旋转轴向量应为单位向量!')
     }
@@ -346,6 +393,30 @@ class Matrix4x3 {
       }
     }
     this.tx = this.ty = this.tx = 0
+  }
+
+  /**
+   * 设置指定反射平面的反射矩阵
+   *
+   * @param {Vector3} n
+   * @memberof Matrix4x3
+   */
+  setupReflection(n: Vector3): void {
+    if(Math.abs(Vector3.getNorm(n) - 1) > 0.01) {
+      throw Error('反射平面法向量应为单位向量!')
+    }
+
+    let ax = -2 * n.x
+    let ay = -2 * n.y
+    let az = -2 * n.z
+
+    this.m11 = 1 + ax * n.x
+    this.m22 = 1 + ay * n.y
+    this.m33 = 1 + az * n.z
+    this.m12 = this.m21 = ax * n.y
+    this.m13 = this.m31 = ax * n.z
+    this.m23 = this.m32 = ay * n.z
+    this.tx = this.ty = this.tz = 0
   }
 
 }
