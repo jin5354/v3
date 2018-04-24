@@ -96,7 +96,7 @@ var Vector3 = /** @class */ (function () {
         return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y) + (a.z - b.z) * (a.z - b.z));
     };
     /**
-     * innerProduct 向量点乘
+     * dotProduct 向量点乘
      * 反应两向量相似程度
      *
      * @static
@@ -105,7 +105,7 @@ var Vector3 = /** @class */ (function () {
      * @returns {number}
      * @memberof Vector3
      */
-    Vector3.innerProduct = function (a, b) {
+    Vector3.dotProduct = function (a, b) {
         return a.x * b.x + a.y * b.y + a.z * b.z;
     };
     /**
@@ -118,7 +118,7 @@ var Vector3 = /** @class */ (function () {
      * @memberof Vector3
      */
     Vector3.getAngle = function (a, b) {
-        return Math.acos(Vector3.innerProduct(a, b) / (Vector3.getNorm(a) * Vector3.getNorm(b)));
+        return Math.acos(Vector3.dotProduct(a, b) / (Vector3.getNorm(a) * Vector3.getNorm(b)));
     };
     /**
      * crossProduct 向量叉乘
