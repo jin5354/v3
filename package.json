@@ -1,6 +1,6 @@
 {
   "name": "v3js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "v3.js",
   "main": "built/index.js",
   "types": "built/index.d.js",
