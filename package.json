@@ -1,8 +1,9 @@
 {
   "name": "v3js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "v3.js",
-  "main": "built/index.js",
+  "main": "dist/v3.min.js",
+  "module": "es6/index.js",
   "types": "built/index.d.js",
   "scripts": {
     "test": "tsc -d && ava test --verbose",
