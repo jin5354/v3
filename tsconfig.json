@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-      "outDir": "./built",
       "target": "es5",
       "noImplicitReturns": true,
       "noFallthroughCasesInSwitch": true,
