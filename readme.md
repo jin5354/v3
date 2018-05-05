@@ -15,6 +15,12 @@ Doc: [https://jin5354.github.io/v3/](https://jin5354.github.io/v3/)
 $ npm i v3js --save
 ```
 
+## usage
+
+```js
+import { Vector3, EulerAngles, Matrix4x3, RotationMatrix, Quaternion } from 'v3js'
+```
+
 ## Utils
 
 - Vector3 三维向量
