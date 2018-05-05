@@ -1,10 +1,10 @@
 {
   "name": "v3js",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "v3.js",
   "main": "dist/v3.min.js",
   "module": "es6/index.js",
-  "types": "built/index.d.js",
+  "types": "es6/index.d.ts",
   "scripts": {
     "test": "tsc -d && ava test --verbose",
     "lint": "tslint src/**/* --fix",
