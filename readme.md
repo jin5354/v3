@@ -9,6 +9,14 @@ Repo: [https://github.com/jin5354/v3](https://github.com/jin5354/v3)
 
 Doc: [https://jin5354.github.io/v3/](https://jin5354.github.io/v3/)
 
+## Install
+
+```bash
+$ npm i v3js --save
+```
+
+## Utils
+
 - Vector3 三维向量
 - EulerAngles 欧拉角
 - Quaternion 四元数
