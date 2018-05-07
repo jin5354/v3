@@ -55,8 +55,8 @@ class Matrix4x3 {
   static vector3Multiply(v: Vector3, m: Matrix4x3): Vector3 {
     return new Vector3(
       v.x * m.m11 + v.y * m.m21 + v.z * m.m31 + m.tx,
-      v.x * m.m12 + v.y * m.m22 + v.z * m.m32 + m.tx,
-      v.x * m.m13 + v.y * m.m23 + v.z * m.m33 + m.tx
+      v.x * m.m12 + v.y * m.m22 + v.z * m.m32 + m.ty,
+      v.x * m.m13 + v.y * m.m23 + v.z * m.m33 + m.tz
     )
   }
 
