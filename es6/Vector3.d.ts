@@ -103,5 +103,6 @@ declare class Vector3 {
      * @memberof Vector3
      */
     normalize(): void;
+    [Symbol.iterator](): Object;
 }
 export default Vector3;

@@ -150,6 +150,19 @@ class Vector3 {
       this.z = this.z / norm
     }
   }
+
+  [Symbol.iterator](): Object {
+    let values: Array<number> = [this.x, this.y, this.z]
+    let index: number = 0
+    return {
+      next(): IteratorResult<number> {
+        return {
+          done: index === values.length,
+          value: values[index++]
+        }
+      }
+    }
+  }
 }
 
 export default Vector3
