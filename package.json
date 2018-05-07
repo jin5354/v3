@@ -8,7 +8,7 @@
   "scripts": {
     "test": "tsc -d && ava test --verbose",
     "lint": "tslint src/**/* --fix",
-    "build": "NODE_ENV=production webpack --config build/webpack.config.js --colors --profile"
+    "build": "NODE_ENV=production webpack --config build/webpack.config.js --colors --profile && tsc --outDir es6 -d"
   },
   "repository": {
     "type": "git",
