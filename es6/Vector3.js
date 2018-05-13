@@ -140,6 +140,21 @@ class Vector3 {
             this.z = this.z / norm;
         }
     }
+    /**
+     * 获取该向量的 vec3 类型化数组
+     *
+     * @returns {Float32Array}
+     * @memberof Vector3
+     */
+    getVec3FloatArray() {
+        return new Float32Array([this.x, this.y, this.z]);
+    }
+    /**
+     * 迭代器
+     *
+     * @returns {Object}
+     * @memberof Vector3
+     */
     [Symbol.iterator]() {
         let values = [this.x, this.y, this.z];
         let index = 0;

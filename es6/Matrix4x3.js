@@ -373,5 +373,42 @@ class Matrix4x3 {
         this.m23 = this.m32 = ay * n.z;
         this.tx = this.ty = this.tz = 0;
     }
+    /**
+     * 获取该矩阵的 mat4 类型化数组
+     *
+     * @returns {Float32Array}
+     * @memberof Matrix4x3
+     */
+    getMat4FloatArray() {
+        return new Float32Array([
+            this.m11, this.m12, this.m13, 0,
+            this.m21, this.m22, this.m23, 0,
+            this.m31, this.m32, this.m33, 0,
+            this.tx, this.ty, this.tz, 1
+        ]);
+    }
+    /**
+     * 迭代器
+     *
+     * @returns {Object}
+     * @memberof Matrix4x3
+     */
+    [Symbol.iterator]() {
+        let values = [
+            this.m11, this.m12, this.m13, 0,
+            this.m21, this.m22, this.m23, 0,
+            this.m31, this.m32, this.m33, 0,
+            this.tx, this.ty, this.tz, 1
+        ];
+        let index = 0;
+        return {
+            next() {
+                return {
+                    done: index === values.length,
+                    value: values[index++]
+                };
+            }
+        };
+    }
 }
 export default Matrix4x3;

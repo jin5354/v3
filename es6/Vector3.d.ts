@@ -103,6 +103,19 @@ declare class Vector3 {
      * @memberof Vector3
      */
     normalize(): void;
+    /**
+     * 获取该向量的 vec3 类型化数组
+     *
+     * @returns {Float32Array}
+     * @memberof Vector3
+     */
+    getVec3FloatArray(): Float32Array;
+    /**
+     * 迭代器
+     *
+     * @returns {Object}
+     * @memberof Vector3
+     */
     [Symbol.iterator](): Object;
 }
 export default Vector3;
