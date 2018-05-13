@@ -1,6 +1,7 @@
 import Vector3 from './Vector3';
 import EulerAngles from './EulerAngles';
 import RotationMatrix from './RotationMatrix';
+import Matrix4 from './Matrix4';
 /**
  * 变换矩阵
  *
@@ -12,7 +13,7 @@ import RotationMatrix from './RotationMatrix';
  *
  * @class Matrix4x3
  */
-declare class Matrix4x3 {
+declare class Matrix4x3 extends Matrix4 {
     m11: number;
     m12: number;
     m13: number;
@@ -45,12 +46,6 @@ declare class Matrix4x3 {
      * @memberof Matrix4x3
      */
     static matrix4x3Multiply(...args: Matrix4x3[]): Matrix4x3;
-    /**
-     * 置为单位矩阵
-     *
-     * @memberof Matrix4x3
-     */
-    identity(): void;
     /**
      * 清空平移部分
      *
@@ -150,19 +145,5 @@ declare class Matrix4x3 {
      * @memberof Matrix4x3
      */
     setupReflection(n: Vector3): void;
-    /**
-     * 获取该矩阵的 mat4 类型化数组
-     *
-     * @returns {Float32Array}
-     * @memberof Matrix4x3
-     */
-    getMat4FloatArray(): Float32Array;
-    /**
-     * 迭代器
-     *
-     * @returns {Object}
-     * @memberof Matrix4x3
-     */
-    [Symbol.iterator](): Object;
 }
 export default Matrix4x3;

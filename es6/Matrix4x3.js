@@ -1,5 +1,6 @@
 import Vector3 from './Vector3';
 import RotationMatrix from './RotationMatrix';
+import Matrix4 from './Matrix4';
 /**
  * 变换矩阵
  *
@@ -11,8 +12,9 @@ import RotationMatrix from './RotationMatrix';
  *
  * @class Matrix4x3
  */
-class Matrix4x3 {
+class Matrix4x3 extends Matrix4 {
     constructor(m11, m12, m13, m21, m22, m23, m31, m32, m33, tx, ty, tz) {
+        super(m11, m12, m13, 0, m21, m22, m23, 0, m31, m32, m33, 0, tx, ty, tz, 1);
         this.m11 = 0;
         this.m12 = 0;
         this.m13 = 0;
@@ -25,18 +27,6 @@ class Matrix4x3 {
         this.tx = 0;
         this.ty = 0;
         this.tz = 0;
-        this.m11 = m11;
-        this.m12 = m12;
-        this.m13 = m13;
-        this.m21 = m21;
-        this.m22 = m22;
-        this.m23 = m23;
-        this.m31 = m31;
-        this.m32 = m32;
-        this.m33 = m33;
-        this.tx = tx;
-        this.ty = ty;
-        this.tz = tz;
     }
     /**
      * Vector3 乘 Matrix4x3
@@ -65,25 +55,6 @@ class Matrix4x3 {
         return args.reduce((a, b) => {
             return new Matrix4x3(a.m11 * b.m11 + a.m12 * b.m21 + a.m13 * b.m31, a.m11 * b.m12 + a.m12 * b.m22 + a.m13 * b.m32, a.m11 * b.m13 + a.m12 * b.m23 + a.m13 * b.m33, a.m21 * b.m11 + a.m22 * b.m21 + a.m23 * b.m31, a.m21 * b.m12 + a.m22 * b.m22 + a.m23 * b.m32, a.m21 * b.m13 + a.m22 * b.m23 + a.m23 * b.m33, a.m31 * b.m11 + a.m32 * b.m21 + a.m33 * b.m31, a.m31 * b.m12 + a.m32 * b.m22 + a.m33 * b.m32, a.m31 * b.m13 + a.m32 * b.m23 + a.m33 * b.m33, a.tx * b.m11 + a.ty * b.m21 + a.tz * b.m31 + b.tx, a.tx * b.m12 + a.ty * b.m22 + a.tz * b.m32 + b.ty, a.tx * b.m13 + a.ty * b.m23 + a.tz * b.m33 + b.tz);
         });
-    }
-    /**
-     * 置为单位矩阵
-     *
-     * @memberof Matrix4x3
-     */
-    identity() {
-        this.m11 = 1;
-        this.m12 = 0;
-        this.m13 = 0;
-        this.m21 = 0;
-        this.m22 = 1;
-        this.m23 = 0;
-        this.m31 = 0;
-        this.m32 = 0;
-        this.m33 = 1;
-        this.tx = 0;
-        this.ty = 0;
-        this.tz = 0;
     }
     /**
      * 清空平移部分
@@ -372,43 +343,6 @@ class Matrix4x3 {
         this.m13 = this.m31 = ax * n.z;
         this.m23 = this.m32 = ay * n.z;
         this.tx = this.ty = this.tz = 0;
-    }
-    /**
-     * 获取该矩阵的 mat4 类型化数组
-     *
-     * @returns {Float32Array}
-     * @memberof Matrix4x3
-     */
-    getMat4FloatArray() {
-        return new Float32Array([
-            this.m11, this.m12, this.m13, 0,
-            this.m21, this.m22, this.m23, 0,
-            this.m31, this.m32, this.m33, 0,
-            this.tx, this.ty, this.tz, 1
-        ]);
-    }
-    /**
-     * 迭代器
-     *
-     * @returns {Object}
-     * @memberof Matrix4x3
-     */
-    [Symbol.iterator]() {
-        let values = [
-            this.m11, this.m12, this.m13, 0,
-            this.m21, this.m22, this.m23, 0,
-            this.m31, this.m32, this.m33, 0,
-            this.tx, this.ty, this.tz, 1
-        ];
-        let index = 0;
-        return {
-            next() {
-                return {
-                    done: index === values.length,
-                    value: values[index++]
-                };
-            }
-        };
     }
 }
 export default Matrix4x3;
