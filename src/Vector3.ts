@@ -151,6 +151,22 @@ class Vector3 {
     }
   }
 
+  /**
+   * 获取该向量的 vec3 类型化数组
+   *
+   * @returns {Float32Array}
+   * @memberof Vector3
+   */
+  getVec3FloatArray(): Float32Array {
+    return new Float32Array([this.x, this.y, this.z])
+  }
+
+  /**
+   * 迭代器
+   *
+   * @returns {Object}
+   * @memberof Vector3
+   */
   [Symbol.iterator](): Object {
     let values: Array<number> = [this.x, this.y, this.z]
     let index: number = 0
