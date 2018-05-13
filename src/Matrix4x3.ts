@@ -2,6 +2,7 @@ import Vector3 from './Vector3'
 import EulerAngles from './EulerAngles'
 import RotationMatrix from './RotationMatrix'
 import Quaternion from './Quaternion'
+import Matrix4 from './Matrix4'
 
 /**
  * 变换矩阵
@@ -14,7 +15,7 @@ import Quaternion from './Quaternion'
  *
  * @class Matrix4x3
  */
-class Matrix4x3 {
+class Matrix4x3 extends Matrix4 {
   m11: number = 0
   m12: number = 0
   m13: number = 0
@@ -29,18 +30,7 @@ class Matrix4x3 {
   tz: number = 0
 
   constructor(m11: number, m12: number, m13: number, m21: number, m22: number, m23: number, m31: number, m32: number, m33: number, tx: number, ty: number, tz: number) {
-    this.m11 = m11
-    this.m12 = m12
-    this.m13 = m13
-    this.m21 = m21
-    this.m22 = m22
-    this.m23 = m23
-    this.m31 = m31
-    this.m32 = m32
-    this.m33 = m33
-    this.tx = tx
-    this.ty = ty
-    this.tz = tz
+    super(m11, m12, m13, 0, m21, m22, m23, 0, m31, m32, m33, 0, tx, ty, tz, 1)
   }
 
   /**
@@ -88,26 +78,6 @@ class Matrix4x3 {
         a.tx * b.m13 + a.ty * b.m23 + a.tz * b.m33 + b.tz
       )
     })
-  }
-
-  /**
-   * 置为单位矩阵
-   *
-   * @memberof Matrix4x3
-   */
-  identity() {
-    this.m11 = 1
-    this.m12 = 0
-    this.m13 = 0
-    this.m21 = 0
-    this.m22 = 1
-    this.m23 = 0
-    this.m31 = 0
-    this.m32 = 0
-    this.m33 = 1
-    this.tx = 0
-    this.ty = 0
-    this.tz = 0
   }
 
   /**
@@ -417,45 +387,6 @@ class Matrix4x3 {
     this.m13 = this.m31 = ax * n.z
     this.m23 = this.m32 = ay * n.z
     this.tx = this.ty = this.tz = 0
-  }
-
-  /**
-   * 获取该矩阵的 mat4 类型化数组
-   *
-   * @returns {Float32Array}
-   * @memberof Matrix4x3
-   */
-  getMat4FloatArray(): Float32Array {
-    return new Float32Array([
-      this.m11, this.m12, this.m13, 0,
-      this.m21, this.m22, this.m23, 0,
-      this.m31, this.m32, this.m33, 0,
-      this.tx, this.ty, this.tz, 1
-    ])
-  }
-
-  /**
-   * 迭代器
-   *
-   * @returns {Object}
-   * @memberof Matrix4x3
-   */
-  [Symbol.iterator](): Object {
-    let values: Array<number> = [
-      this.m11, this.m12, this.m13, 0,
-      this.m21, this.m22, this.m23, 0,
-      this.m31, this.m32, this.m33, 0,
-      this.tx, this.ty, this.tz, 1
-    ]
-    let index: number = 0
-    return {
-      next(): IteratorResult<number> {
-        return {
-          done: index === values.length,
-          value: values[index++]
-        }
-      }
-    }
   }
 }
 
