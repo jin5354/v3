@@ -9,11 +9,11 @@ import * as MathUtil from './MathUtil'
  * @class EulerAngles
  */
 class EulerAngles {
-  heading: number = 0
-  picth: number = 0
-  bank: number = 0
+  heading: number
+  picth: number
+  bank: number
 
-  constructor(heading: number, picth: number, bank: number) {
+  constructor(heading: number = 0, picth: number = 0, bank: number = 0) {
     this.heading = heading
     this.picth = picth
     this.bank = bank

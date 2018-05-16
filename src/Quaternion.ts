@@ -18,12 +18,12 @@ class Quaternion {
    */
   static QuaternionIdentity = new Quaternion(1, 0, 0, 0)
 
-  w: number = 0
-  x: number = 0
-  y: number = 0
-  z: number = 0
+  w: number
+  x: number
+  y: number
+  z: number
 
-  constructor(w: number, x: number, y: number, z: number) {
+  constructor(w: number = 0, x: number = 0, y: number = 0, z: number = 0) {
     this.w = w
     this.x = x
     this.y = y
