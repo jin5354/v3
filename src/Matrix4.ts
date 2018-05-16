@@ -89,13 +89,15 @@ class Matrix4 {
    */
   transpose(): void {
     [
-      this.m12, this.m13, this.m14,
-      this.m23, this.m24,
-      this.m34
+      this.m11, this.m12, this.m13, this.m14,
+      this.m21, this.m22, this.m23, this.m24,
+      this.m31, this.m32, this.m33, this.m34,
+      this.tx, this.ty, this.tz, this.tw
     ] = [
-      this.m21, this.m31, this.tx,
-      this.m32, this.ty,
-      this.tz
+      this.m11, this.m21, this.m31, this.tx,
+      this.m12, this.m22, this.m32, this.ty,
+      this.m13, this.m23, this.m33, this.tz,
+      this.m14, this.m24, this.m34, this.tw
     ]
   }
 
