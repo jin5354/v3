@@ -6,10 +6,7 @@ import * as MathUtil from './MathUtil';
  * @class EulerAngles
  */
 class EulerAngles {
-    constructor(heading, picth, bank) {
-        this.heading = 0;
-        this.picth = 0;
-        this.bank = 0;
+    constructor(heading = 0, picth = 0, bank = 0) {
         this.heading = heading;
         this.picth = picth;
         this.bank = bank;

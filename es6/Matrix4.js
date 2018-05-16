@@ -4,23 +4,7 @@
  * @class Matrix4
  */
 class Matrix4 {
-    constructor(m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, tx, ty, tz, tw) {
-        this.m11 = 0;
-        this.m12 = 0;
-        this.m13 = 0;
-        this.m14 = 0;
-        this.m21 = 0;
-        this.m22 = 0;
-        this.m23 = 0;
-        this.m24 = 0;
-        this.m31 = 0;
-        this.m32 = 0;
-        this.m33 = 0;
-        this.m34 = 0;
-        this.tx = 0;
-        this.ty = 0;
-        this.tz = 0;
-        this.tw = 0;
+    constructor(m11 = 0, m12 = 0, m13 = 0, m14 = 0, m21 = 0, m22 = 0, m23 = 0, m24 = 0, m31 = 0, m32 = 0, m33 = 0, m34 = 0, tx = 0, ty = 0, tz = 0, tw = 0) {
         this.m11 = m11;
         this.m12 = m12;
         this.m13 = m13;

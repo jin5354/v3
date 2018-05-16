@@ -7,7 +7,7 @@ declare class Vector3 {
     x: number;
     y: number;
     z: number;
-    constructor(x: number, y: number, z: number);
+    constructor(x?: number, y?: number, z?: number);
     /**
      * isEqual 判断两向量是否相等
      *

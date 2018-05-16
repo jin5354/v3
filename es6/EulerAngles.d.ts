@@ -10,7 +10,7 @@ declare class EulerAngles {
     heading: number;
     picth: number;
     bank: number;
-    constructor(heading: number, picth: number, bank: number);
+    constructor(heading?: number, picth?: number, bank?: number);
     /**
      * 从世界——物体旋转矩阵中提取欧拉角
      *

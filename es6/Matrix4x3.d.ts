@@ -26,7 +26,7 @@ declare class Matrix4x3 extends Matrix4 {
     tx: number;
     ty: number;
     tz: number;
-    constructor(m11: number, m12: number, m13: number, m21: number, m22: number, m23: number, m31: number, m32: number, m33: number, tx: number, ty: number, tz: number);
+    constructor(m11?: number, m12?: number, m13?: number, m21?: number, m22?: number, m23?: number, m31?: number, m32?: number, m33?: number, tx?: number, ty?: number, tz?: number);
     /**
      * Vector3 乘 Matrix4x3
      *

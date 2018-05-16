@@ -6,11 +6,7 @@ import * as MathUtil from './MathUtil';
  * @class Quaternion
  */
 class Quaternion {
-    constructor(w, x, y, z) {
-        this.w = 0;
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
+    constructor(w = 0, x = 0, y = 0, z = 0) {
         this.w = w;
         this.x = x;
         this.y = y;
