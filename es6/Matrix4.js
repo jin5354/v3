@@ -23,6 +23,18 @@ class Matrix4 {
         this.tw = tw;
     }
     /**
+     * 标量乘法
+     *
+     * @static
+     * @param {number} scalar
+     * @param {Matrix4} m
+     * @returns {Matrix4}
+     * @memberof Matrix4
+     */
+    static scalarMultiply(scalar, m) {
+        return new Matrix4(m.m11 * scalar, m.m12 * scalar, m.m13 * scalar, m.m14 * scalar, m.m21 * scalar, m.m22 * scalar, m.m23 * scalar, m.m24 * scalar, m.m31 * scalar, m.m32 * scalar, m.m33 * scalar, m.m34 * scalar, m.tx * scalar, m.ty * scalar, m.tz * scalar, m.tw * scalar);
+    }
+    /**
      * 置为单位矩阵
      *
      * @memberof Matrix4
