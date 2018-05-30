@@ -1,3 +1,7 @@
+import Vector3 from './Vector3'
+import RotationMatrix from './RotationMatrix'
+import Matrix4x3 from './Matrix4x3'
+
 /**
  * mat4 标准矩阵
  *
@@ -114,6 +118,62 @@ class Matrix4 {
       this.m31, this.m32, this.m33, this.m34,
       this.tx, this.ty, this.tz, this.tw
     ])
+  }
+
+  /**
+   * 根据 eye, center, up 设置视图矩阵
+   *
+   * @param {Vector3} eye
+   * @param {Vector3} center
+   * @param {Vector3} up
+   * @memberof Matrix4
+   */
+  setLookUp(eye: Vector3, center: Vector3, up: Vector3): void {
+    // 构建新坐标轴
+    // z轴 = eye - center
+    let z: Vector3 = Vector3.plus(eye, Vector3.negate(center))
+    z.normalize()
+    let y: Vector3 = up
+    y.normalize()
+    let x: Vector3 = Vector3.crossProduct(y, z)
+    x.normalize()
+
+    // 构建旋转矩阵
+    let rMatrix = new RotationMatrix(
+      ...x,
+      ...y,
+      ...z
+    )
+
+    // 构建平移矩阵
+    let tMatrix = new Matrix4x3()
+    tMatrix.identity()
+    tMatrix.setTranslation(eye)
+
+    // 构建复合矩阵，且求逆(物体绝对位置不动，是坐标轴变动了，物体相对坐标轴做反向运动)
+    // C = R*T
+    // C^-1 = T^-1*R^-1 正交矩阵的逆等于其转置
+    // C^-1 = T^-1 * R^t 反向平移 + 反向旋转
+    tMatrix.setTranslation(Vector3.negate(eye))
+    rMatrix.transpose()
+    let composedMatrix = Matrix4x3.matrix4x3Multiply(tMatrix, rMatrix)
+
+    this.m11 = composedMatrix.m11
+    this.m12 = composedMatrix.m12
+    this.m13 = composedMatrix.m13
+    this.m14 = composedMatrix.m14
+    this.m21 = composedMatrix.m21
+    this.m22 = composedMatrix.m22
+    this.m23 = composedMatrix.m23
+    this.m24 = composedMatrix.m24
+    this.m31 = composedMatrix.m31
+    this.m32 = composedMatrix.m32
+    this.m33 = composedMatrix.m33
+    this.m34 = composedMatrix.m34
+    this.tx = composedMatrix.tx
+    this.ty = composedMatrix.ty
+    this.tz = composedMatrix.tz
+    this.tw = composedMatrix.tw
   }
 
   /**

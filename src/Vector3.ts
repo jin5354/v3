@@ -167,7 +167,7 @@ class Vector3 {
    * @returns {Object}
    * @memberof Vector3
    */
-  [Symbol.iterator](): Object {
+  [Symbol.iterator](): Iterator<number> {
     let values: Array<number> = [this.x, this.y, this.z]
     let index: number = 0
     return {

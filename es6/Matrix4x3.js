@@ -148,7 +148,8 @@ class Matrix4x3 extends Matrix4 {
         let sin = Math.sin(theta);
         let cos = Math.cos(theta);
         switch (axis) {
-            case ('x'): {
+            case ('x'):
+            case ('X'): {
                 this.m11 = 1;
                 this.m12 = 0;
                 this.m13 = 0;
@@ -160,7 +161,8 @@ class Matrix4x3 extends Matrix4 {
                 this.m33 = cos;
                 break;
             }
-            case ('y'): {
+            case ('y'):
+            case ('Y'): {
                 this.m11 = cos;
                 this.m12 = 0;
                 this.m13 = -sin;
@@ -172,7 +174,8 @@ class Matrix4x3 extends Matrix4 {
                 this.m33 = cos;
                 break;
             }
-            case ('z'): {
+            case ('z'):
+            case ('Z'): {
                 this.m11 = cos;
                 this.m12 = sin;
                 this.m13 = 0;
@@ -272,7 +275,8 @@ class Matrix4x3 extends Matrix4 {
      */
     setupShear(axis, s, t) {
         switch (axis) {
-            case ('x'): {
+            case ('x'):
+            case ('X'): {
                 this.m11 = 1;
                 this.m12 = 0;
                 this.m13 = 0;
@@ -284,7 +288,8 @@ class Matrix4x3 extends Matrix4 {
                 this.m33 = 1;
                 break;
             }
-            case ('y'): {
+            case ('y'):
+            case ('Y'): {
                 this.m11 = 1;
                 this.m12 = 0;
                 this.m13 = 0;
@@ -296,7 +301,8 @@ class Matrix4x3 extends Matrix4 {
                 this.m33 = 1;
                 break;
             }
-            case ('z'): {
+            case ('z'):
+            case ('Z'): {
                 this.m11 = 1;
                 this.m12 = s;
                 this.m13 = t;

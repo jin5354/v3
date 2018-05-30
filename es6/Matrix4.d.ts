@@ -1,3 +1,4 @@
+import Vector3 from './Vector3';
 /**
  * mat4 标准矩阵
  *
@@ -50,6 +51,15 @@ declare class Matrix4 {
      * @memberof Matrix4x3
      */
     getMat4FloatArray(): Float32Array;
+    /**
+     * 根据 eye, center, up 设置视图矩阵
+     *
+     * @param {Vector3} eye
+     * @param {Vector3} center
+     * @param {Vector3} up
+     * @memberof Matrix4
+     */
+    setLookUp(eye: Vector3, center: Vector3, up: Vector3): void;
     /**
      * 迭代器
      *

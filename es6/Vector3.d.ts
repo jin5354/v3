@@ -116,6 +116,6 @@ declare class Vector3 {
      * @returns {Object}
      * @memberof Vector3
      */
-    [Symbol.iterator](): Object;
+    [Symbol.iterator](): Iterator<number>;
 }
 export default Vector3;
