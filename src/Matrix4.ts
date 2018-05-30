@@ -128,7 +128,7 @@ class Matrix4 {
    * @param {Vector3} up
    * @memberof Matrix4
    */
-  setLookUp(eye: Vector3, center: Vector3, up: Vector3): void {
+  setLookAt(eye: Vector3, center: Vector3, up: Vector3): void {
     // 构建新坐标轴
     // z轴 = eye - center
     let z: Vector3 = Vector3.plus(eye, Vector3.negate(center))

@@ -59,7 +59,7 @@ declare class Matrix4 {
      * @param {Vector3} up
      * @memberof Matrix4
      */
-    setLookUp(eye: Vector3, center: Vector3, up: Vector3): void;
+    setLookAt(eye: Vector3, center: Vector3, up: Vector3): void;
     /**
      * 迭代器
      *
