@@ -1,6 +1,6 @@
 {
   "name": "v3js",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "v3.js",
   "main": "dist/v3.min.js",
   "module": "es6/index.js",
