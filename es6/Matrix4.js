@@ -140,6 +140,70 @@ class Matrix4 {
         this.tw = composedMatrix.tw;
     }
     /**
+     * 构建正射投影矩阵
+     *
+     * @param {number} left
+     * @param {number} right
+     * @param {number} bottom
+     * @param {number} top
+     * @param {number} near
+     * @param {number} far
+     * @memberof Matrix4
+     */
+    setOrtho(left, right, bottom, top, near, far) {
+        // 构建正射投影矩阵
+        // 默认可视空间是 x: -1 ~ 1, y: -1 ~ 1, z: -1 ~ 1
+        // http://www.cnblogs.com/yiyezhai/archive/2012/09/12/2677902.html
+        this.m11 = 2 / (right - left);
+        this.m12 = 0;
+        this.m13 = 0;
+        this.m14 = 0;
+        this.m21 = 0;
+        this.m22 = 2 / (top - bottom);
+        this.m23 = 0;
+        this.m24 = 0;
+        this.m31 = 0;
+        this.m32 = 0;
+        this.m33 = -2 / (far - near);
+        this.m34 = 0;
+        this.tx = -(right + left) / (right - left);
+        this.ty = -(top + bottom) / (top - bottom);
+        this.tz = -(far + near) / (far - near);
+        this.tw = 1;
+    }
+    /**
+     * 构建透视投影矩阵
+     *
+     * @param {number} fov
+     * @param {number} aspect
+     * @param {number} near
+     * @param {number} far
+     * @memberof Matrix4
+     */
+    setPerspective(fov, aspect, near, far) {
+        // 构建透视投影矩阵
+        // 默认可视空间是 x: -1 ~ 1, y: -1 ~ 1, z: -1 ~ 1
+        // 推导过程 https://stackoverflow.com/questions/28286057/trying-to-understand-the-math-behind-the-perspective-matrix-in-webgl/28301213#28301213 写的贼好
+        let f = Math.tan(Math.PI / 2 - fov / 2);
+        let rangeInv = 1 / (near - far);
+        this.m11 = f / aspect;
+        this.m12 = 0;
+        this.m13 = 0;
+        this.m14 = 0;
+        this.m21 = 0;
+        this.m22 = f;
+        this.m23 = 0;
+        this.m24 = 0;
+        this.m31 = 0;
+        this.m32 = 0;
+        this.m33 = rangeInv * (near + far);
+        this.m34 = -1;
+        this.tx = 0;
+        this.ty = 0;
+        this.tz = 2 * near * far * rangeInv;
+        this.tw = 0;
+    }
+    /**
      * 迭代器
      *
      * @returns {Object}

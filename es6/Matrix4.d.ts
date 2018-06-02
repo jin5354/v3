@@ -61,6 +61,28 @@ declare class Matrix4 {
      */
     setLookAt(eye: Vector3, center: Vector3, up: Vector3): void;
     /**
+     * 构建正射投影矩阵
+     *
+     * @param {number} left
+     * @param {number} right
+     * @param {number} bottom
+     * @param {number} top
+     * @param {number} near
+     * @param {number} far
+     * @memberof Matrix4
+     */
+    setOrtho(left: number, right: number, bottom: number, top: number, near: number, far: number): void;
+    /**
+     * 构建透视投影矩阵
+     *
+     * @param {number} fov
+     * @param {number} aspect
+     * @param {number} near
+     * @param {number} far
+     * @memberof Matrix4
+     */
+    setPerspective(fov: number, aspect: number, near: number, far: number): void;
+    /**
      * 迭代器
      *
      * @returns {Object}
