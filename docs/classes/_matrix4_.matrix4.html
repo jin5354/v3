@@ -973,7 +973,19 @@ img { max-width: 100%; }
 					<a href="_matrix4_.matrix4.html#identity" class="tsd-kind-icon">identity</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="_matrix4_.matrix4.html#setlookat" class="tsd-kind-icon">set<wbr>Look<wbr>At</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="_matrix4_.matrix4.html#setortho" class="tsd-kind-icon">set<wbr>Ortho</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="_matrix4_.matrix4.html#setperspective" class="tsd-kind-icon">set<wbr>Perspective</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="_matrix4_.matrix4.html#transpose" class="tsd-kind-icon">transpose</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a href="_matrix4_.matrix4.html#scalarmultiply" class="tsd-kind-icon">scalar<wbr>Multiply</a>
 				</li>
 			</ul>
 		</li>
@@ -1043,7 +1055,11 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#___iterator" class="tsd-kind-icon">__@iterator</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#getmat4floatarray" class="tsd-kind-icon">get<wbr>Mat4<wbr>Float<wbr>Array</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#identity" class="tsd-kind-icon">identity</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#setlookat" class="tsd-kind-icon">set<wbr>Look<wbr>At</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#setortho" class="tsd-kind-icon">set<wbr>Ortho</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#setperspective" class="tsd-kind-icon">set<wbr>Perspective</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#transpose" class="tsd-kind-icon">transpose</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_matrix4_.matrix4.html#scalarmultiply" class="tsd-kind-icon">scalar<wbr>Multiply</a></li>
 						</ul>
 					</section>
 				</div>
@@ -1055,64 +1071,64 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Matrix4<span class="tsd-signature-symbol">(</span>m11<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m12<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m13<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m14<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m21<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m22<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m23<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m24<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m31<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m32<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m33<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m34<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, tx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, ty<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, tz<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, tw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_matrix4_.matrix4.html" class="tsd-signature-type">Matrix4</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Matrix4<span class="tsd-signature-symbol">(</span>m11<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m12<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m13<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m14<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m21<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m22<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m23<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m24<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m31<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m32<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m33<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, m34<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, tx<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, ty<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, tz<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, tw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_matrix4_.matrix4.html" class="tsd-signature-type">Matrix4</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L22">Matrix4.ts:22</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L26">Matrix4.ts:26</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>m11: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m11: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m12: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m12: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m13: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m13: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m14: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m14: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m21: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m21: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m22: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m22: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m23: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m23: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m24: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m24: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m31: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m31: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m32: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m32: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m33: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m33: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>m34: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m34: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>tx: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> tx: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>ty: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> ty: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>tz: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> tz: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5>tw: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> tw: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="_matrix4_.matrix4.html" class="tsd-signature-type">Matrix4</a></h4>
@@ -1125,160 +1141,160 @@ img { max-width: 100%; }
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m11" class="tsd-anchor"></a>
 				<h3>m11</h3>
-				<div class="tsd-signature tsd-kind-icon">m11<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m11<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L7">Matrix4.ts:7</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L11">Matrix4.ts:11</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m12" class="tsd-anchor"></a>
 				<h3>m12</h3>
-				<div class="tsd-signature tsd-kind-icon">m12<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m12<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L8">Matrix4.ts:8</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L12">Matrix4.ts:12</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m13" class="tsd-anchor"></a>
 				<h3>m13</h3>
-				<div class="tsd-signature tsd-kind-icon">m13<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m13<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L9">Matrix4.ts:9</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L13">Matrix4.ts:13</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m14" class="tsd-anchor"></a>
 				<h3>m14</h3>
-				<div class="tsd-signature tsd-kind-icon">m14<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m14<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L10">Matrix4.ts:10</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L14">Matrix4.ts:14</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m21" class="tsd-anchor"></a>
 				<h3>m21</h3>
-				<div class="tsd-signature tsd-kind-icon">m21<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m21<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L11">Matrix4.ts:11</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L15">Matrix4.ts:15</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m22" class="tsd-anchor"></a>
 				<h3>m22</h3>
-				<div class="tsd-signature tsd-kind-icon">m22<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m22<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L12">Matrix4.ts:12</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L16">Matrix4.ts:16</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m23" class="tsd-anchor"></a>
 				<h3>m23</h3>
-				<div class="tsd-signature tsd-kind-icon">m23<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m23<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L13">Matrix4.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L17">Matrix4.ts:17</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m24" class="tsd-anchor"></a>
 				<h3>m24</h3>
-				<div class="tsd-signature tsd-kind-icon">m24<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m24<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L14">Matrix4.ts:14</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L18">Matrix4.ts:18</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m31" class="tsd-anchor"></a>
 				<h3>m31</h3>
-				<div class="tsd-signature tsd-kind-icon">m31<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m31<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L15">Matrix4.ts:15</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L19">Matrix4.ts:19</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m32" class="tsd-anchor"></a>
 				<h3>m32</h3>
-				<div class="tsd-signature tsd-kind-icon">m32<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m32<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L16">Matrix4.ts:16</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L20">Matrix4.ts:20</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m33" class="tsd-anchor"></a>
 				<h3>m33</h3>
-				<div class="tsd-signature tsd-kind-icon">m33<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m33<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L17">Matrix4.ts:17</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L21">Matrix4.ts:21</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="m34" class="tsd-anchor"></a>
 				<h3>m34</h3>
-				<div class="tsd-signature tsd-kind-icon">m34<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">m34<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L18">Matrix4.ts:18</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L22">Matrix4.ts:22</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="tw" class="tsd-anchor"></a>
 				<h3>tw</h3>
-				<div class="tsd-signature tsd-kind-icon">tw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">tw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L22">Matrix4.ts:22</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L26">Matrix4.ts:26</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="tx" class="tsd-anchor"></a>
 				<h3>tx</h3>
-				<div class="tsd-signature tsd-kind-icon">tx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">tx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L19">Matrix4.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L23">Matrix4.ts:23</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="ty" class="tsd-anchor"></a>
 				<h3>ty</h3>
-				<div class="tsd-signature tsd-kind-icon">ty<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">ty<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L20">Matrix4.ts:20</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L24">Matrix4.ts:24</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="tz" class="tsd-anchor"></a>
 				<h3>tz</h3>
-				<div class="tsd-signature tsd-kind-icon">tz<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+				<div class="tsd-signature tsd-kind-icon">tz<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L21">Matrix4.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L25">Matrix4.ts:25</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1295,7 +1311,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L105">Matrix4.ts:105</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L252">Matrix4.ts:252</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1322,7 +1338,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L90">Matrix4.ts:90</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L114">Matrix4.ts:114</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1349,7 +1365,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L48">Matrix4.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L70">Matrix4.ts:70</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1367,6 +1383,135 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="setlookat" class="tsd-anchor"></a>
+				<h3>set<wbr>Look<wbr>At</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">set<wbr>Look<wbr>At<span class="tsd-signature-symbol">(</span>eye<span class="tsd-signature-symbol">: </span><a href="_vector3_.vector3.html" class="tsd-signature-type">Vector3</a>, center<span class="tsd-signature-symbol">: </span><a href="_vector3_.vector3.html" class="tsd-signature-type">Vector3</a>, up<span class="tsd-signature-symbol">: </span><a href="_vector3_.vector3.html" class="tsd-signature-type">Vector3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L131">Matrix4.ts:131</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>根据 eye, center, up 设置视图矩阵</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>memberof</dt>
+								<dd><p>Matrix4</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>eye: <a href="_vector3_.vector3.html" class="tsd-signature-type">Vector3</a></h5>
+							</li>
+							<li>
+								<h5>center: <a href="_vector3_.vector3.html" class="tsd-signature-type">Vector3</a></h5>
+							</li>
+							<li>
+								<h5>up: <a href="_vector3_.vector3.html" class="tsd-signature-type">Vector3</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="setortho" class="tsd-anchor"></a>
+				<h3>set<wbr>Ortho</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">set<wbr>Ortho<span class="tsd-signature-symbol">(</span>left<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, right<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, bottom<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, top<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, near<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, far<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L190">Matrix4.ts:190</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>构建正射投影矩阵</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>memberof</dt>
+								<dd><p>Matrix4</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>left: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>right: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>bottom: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>top: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>near: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>far: <span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="setperspective" class="tsd-anchor"></a>
+				<h3>set<wbr>Perspective</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">set<wbr>Perspective<span class="tsd-signature-symbol">(</span>fov<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, aspect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, near<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, far<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L221">Matrix4.ts:221</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>构建透视投影矩阵</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>memberof</dt>
+								<dd><p>Matrix4</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>fov: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>aspect: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>near: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>far: <span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="transpose" class="tsd-anchor"></a>
 				<h3>transpose</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -1376,7 +1521,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/272d070/src/Matrix4.ts#L72">Matrix4.ts:72</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L94">Matrix4.ts:94</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1390,6 +1535,44 @@ img { max-width: 100%; }
 							</dl>
 						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+				<a name="scalarmultiply" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> scalar<wbr>Multiply</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<li class="tsd-signature tsd-kind-icon">scalar<wbr>Multiply<span class="tsd-signature-symbol">(</span>scalar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, m<span class="tsd-signature-symbol">: </span><a href="_matrix4_.matrix4.html" class="tsd-signature-type">Matrix4</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_matrix4_.matrix4.html" class="tsd-signature-type">Matrix4</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/a20dbbd/src/Matrix4.ts#L56">Matrix4.ts:56</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>标量乘法</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>static</dt>
+								<dd></dd>
+								<dt>memberof</dt>
+								<dd><p>Matrix4</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>scalar: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>m: <a href="_matrix4_.matrix4.html" class="tsd-signature-type">Matrix4</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="_matrix4_.matrix4.html" class="tsd-signature-type">Matrix4</a></h4>
 					</li>
 				</ul>
 			</section>
