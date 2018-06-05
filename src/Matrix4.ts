@@ -635,7 +635,7 @@ class Matrix4 {
     // C^-1 = T^-1 * R^t 反向平移 + 反向旋转
     tMatrix.setTranslation(Vector3.negate(eye))
     rMatrix.transpose()
-    let composedMatrix = Matrix4x3.matrix4x3Multiply(tMatrix, rMatrix)
+    let composedMatrix = Matrix4.matrix4Multiply(tMatrix, rMatrix)
 
     this.m11 = composedMatrix.m11
     this.m12 = composedMatrix.m12
