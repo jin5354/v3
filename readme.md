@@ -20,7 +20,7 @@ $ npm i v3js --save
 ## usage
 
 ```js
-import { Vector3, EulerAngles, Matrix4x3, RotationMatrix, Quaternion } from 'v3js'
+import { Vector3, EulerAngles, Matrix4, Quaternion } from 'v3js'
 ```
 
 ## Utils
