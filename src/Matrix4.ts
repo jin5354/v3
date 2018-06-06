@@ -638,8 +638,6 @@ class Matrix4 {
 
     // 构建平移矩阵
     let tMatrix = new Matrix4()
-    tMatrix.identity()
-    tMatrix.setTranslation(eye)
 
     // 构建复合矩阵，且求逆(物体绝对位置不动，是坐标轴变动了，物体相对坐标轴做反向运动)
     // C = R*T
