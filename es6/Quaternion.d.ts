@@ -1,5 +1,5 @@
 import Vector3 from './Vector3';
-import RotationMatrix from './RotationMatrix';
+import Matrix4 from './Matrix4';
 import EulerAngles from './EulerAngles';
 /**
  * 四元数类
@@ -122,7 +122,7 @@ declare class Quaternion {
      * @returns {Quaternion}
      * @memberof Quaternion
      */
-    static fromRotationMatrix(m: RotationMatrix): Quaternion;
+    static fromRotationMatrix(m: Matrix4): Quaternion;
     /**
      * 从欧拉角构建物体——世界四元数
      *

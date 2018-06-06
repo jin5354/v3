@@ -15,7 +15,7 @@ class EulerAngles {
      * 从世界——物体旋转矩阵中提取欧拉角
      *
      * @static
-     * @param {RotationMatrix} m
+     * @param {Matrix4} m
      * @memberof EulerAngles
      */
     static fromRotationMatrix(m) {

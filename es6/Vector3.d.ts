@@ -1,3 +1,4 @@
+import Matrix4 from './Matrix4';
 /**
  * 3D向量类
  *
@@ -97,6 +98,16 @@ declare class Vector3 {
      * @memberof Vector3
      */
     static crossProduct(a: Vector3, b: Vector3): Vector3;
+    /**
+     * Vector3 乘 Matrix4
+     *
+     * @static
+     * @param {Vector3} v
+     * @param {Matrix4} m
+     * @returns {Vector3}
+     * @memberof Matrix4
+     */
+    static vector3Multiply(v: Vector3, m: Matrix4): Vector3;
     /**
      * normalize 向量标准化
      *

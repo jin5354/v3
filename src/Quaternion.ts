@@ -1,5 +1,5 @@
 import Vector3 from './Vector3'
-import RotationMatrix from './RotationMatrix'
+import Matrix4 from './Matrix4'
 import EulerAngles from './EulerAngles'
 import * as MathUtil from './MathUtil'
 
@@ -204,7 +204,7 @@ class Quaternion {
    * @returns {Quaternion}
    * @memberof Quaternion
    */
-  static fromRotationMatrix(m: RotationMatrix): Quaternion {
+  static fromRotationMatrix(m: Matrix4): Quaternion {
     let w: number = 0
     let x: number = 0
     let y: number = 0

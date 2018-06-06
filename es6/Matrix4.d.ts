@@ -1,5 +1,4 @@
 import Vector3 from './Vector3';
-import RotationMatrix from './RotationMatrix';
 import EulerAngles from './EulerAngles';
 import Quaternion from './Quaternion';
 /**
@@ -43,7 +42,7 @@ declare class Matrix4 {
      * @returns {RotationMatrix}
      * @memberof Matrix4
      */
-    static fromEulerAngle(orientation: EulerAngles): RotationMatrix;
+    static fromEulerAngle(orientation: EulerAngles): Matrix4;
     /**
      * 从世界-物体四元数构建旋转矩阵
      *
@@ -52,7 +51,7 @@ declare class Matrix4 {
      * @returns {RotationMatrix}
      * @memberof Matrix4
      */
-    static fromWorldToObjectQuaternion(q: Quaternion): RotationMatrix;
+    static fromWorldToObjectQuaternion(q: Quaternion): Matrix4;
     /**
      * 从物体——世界四元数构建旋转矩阵
      *
@@ -61,17 +60,7 @@ declare class Matrix4 {
      * @returns {RotationMatrix}
      * @memberof Matrix4
      */
-    static fromObjectToWorldQuaternion(q: Quaternion): RotationMatrix;
-    /**
-     * Vector3 乘 Matrix4
-     *
-     * @static
-     * @param {Vector3} v
-     * @param {Matrix4} m
-     * @returns {Vector3}
-     * @memberof Matrix4
-     */
-    static vector3Multiply(v: Vector3, m: Matrix4): Vector3;
+    static fromObjectToWorldQuaternion(q: Quaternion): Matrix4;
     /**
      * 矩阵叉乘
      *
@@ -82,7 +71,22 @@ declare class Matrix4 {
      */
     static matrix4Multiply(...args: Matrix4[]): Matrix4;
     /**
-     * 置为单位矩阵
+     * 标量乘法（实例属性）
+     *
+     * @param {number} scalar
+     * @memberof Matrix4
+     */
+    scalarMultiply(scalar: number): void;
+    /**
+     * 矩阵叉乘（实例属性）
+     *
+     * @param {...Matrix4[]} args
+     * @returns {Matrix4}
+     * @memberof Matrix4
+     */
+    matrix4Multiply(...args: Matrix4[]): void;
+    /**
+     * 置为单位矩阵（实例属性）
      *
      * @memberof Matrix4
      */
@@ -94,27 +98,20 @@ declare class Matrix4 {
      */
     clearTranslation(): void;
     /**
-     * 根据向量设置平移部分
+     * 设置平移
      *
      * @param {Vector3} v
      * @memberof Matrix4
      */
     setTranslation(v: Vector3): void;
     /**
-     * 根据向量构建平移矩阵
-     *
-     * @param {Vector3} v
-     * @memberof Matrix4
-     */
-    setupTranslation(v: Vector3): void;
-    /**
      * 构造物体——世界变换矩阵，物体位置和方位在世界中描述
      *
      * @param {Vector3} pos
      * @param {EulerAngles} orientation
      * @memberof Matrix4
      */
-    setupLocalToParentFromEulerAngle(pos: Vector3, orientation: EulerAngles): void;
+    setLocalToParentFromEulerAngle(pos: Vector3, orientation: EulerAngles): void;
     /**
      * 构造物体——世界变换矩阵，物体位置和方位在世界中描述
      *
@@ -122,7 +119,7 @@ declare class Matrix4 {
      * @param {RotationMatrix} orientation
      * @memberof Matrix4
      */
-    setupLocalToParentFromRotationMatrix(pos: Vector3, orientation: RotationMatrix): void;
+    setLocalToParentFromRotationMatrix(pos: Vector3, orientation: Matrix4): void;
     /**
      * 构造世界——物体变换矩阵，物体位置和方位在世界中描述
      *
@@ -130,7 +127,7 @@ declare class Matrix4 {
      * @param {EulerAngles} orientation
      * @memberof Matrix4
      */
-    setupParentToLocalFromEulerAngle(pos: Vector3, orientation: EulerAngles): void;
+    setParentToLocalFromEulerAngle(pos: Vector3, orientation: EulerAngles): void;
     /**
      * 构造世界——物体变换矩阵，物体位置和方位在世界中描述
      *
@@ -138,7 +135,7 @@ declare class Matrix4 {
      * @param {RotationMatrix} orientation
      * @memberof Matrix4
      */
-    setupParentToLocalFromRotationMatrix(pos: Vector3, orientation: RotationMatrix): void;
+    setParentToLocalFromRotationMatrix(pos: Vector3, orientation: Matrix4): void;
     /**
      * 绕坐标轴旋转
      *
@@ -146,7 +143,7 @@ declare class Matrix4 {
      * @param {number} theta
      * @memberof Matrix4
      */
-    setupRotateFromXYZAxis(axis: string, theta: number): void;
+    setRotateFromXYZAxis(axis: string, theta: number): void;
     /**
      * 绕特定轴旋转
      *
@@ -154,14 +151,14 @@ declare class Matrix4 {
      * @param {number} theta
      * @memberof Matrix4
      */
-    setupRotateFromVector3(axis: Vector3, theta: number): void;
+    setRotateFromVector3(axis: Vector3, theta: number): void;
     /**
      * 沿坐标轴缩放
      *
      * @param {Vector3} v
      * @memberof Matrix4
      */
-    setupScale(v: Vector3): void;
+    setScale(v: Vector3): void;
     /**
      * 沿任意轴缩放
      *
@@ -169,7 +166,7 @@ declare class Matrix4 {
      * @param {number} k
      * @memberof Matrix4
      */
-    setupScaleFromAxis(axis: Vector3, k: number): void;
+    setScaleFromAxis(axis: Vector3, k: number): void;
     /**
      * 设置切变
      *
@@ -178,14 +175,14 @@ declare class Matrix4 {
      * @param {number} t
      * @memberof Matrix4
      */
-    setupShear(axis: string, s: number, t: number): void;
+    setShear(axis: string, s: number, t: number): void;
     /**
      * 设置指定反射平面的反射矩阵
      *
      * @param {Vector3} n
      * @memberof Matrix4x3
      */
-    setupReflection(n: Vector3): void;
+    setReflection(n: Vector3): void;
     /**
      * 矩阵转置
      *
@@ -230,6 +227,13 @@ declare class Matrix4 {
      * @memberof Matrix4
      */
     setPerspective(fov: number, aspect: number, near: number, far: number): void;
+    /**
+     * 克隆矩阵
+     *
+     * @param {Matrix4} target
+     * @memberof Matrix4
+     */
+    cloneFrom(target: Matrix4): void;
     /**
      * 迭代器
      *

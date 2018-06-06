@@ -1,5 +1,5 @@
 import Quaternion from './Quaternion';
-import RotationMatrix from './RotationMatrix';
+import Matrix4 from './Matrix4';
 /**
  * 欧拉角类
  * heading-picth-bank
@@ -15,10 +15,10 @@ declare class EulerAngles {
      * 从世界——物体旋转矩阵中提取欧拉角
      *
      * @static
-     * @param {RotationMatrix} m
+     * @param {Matrix4} m
      * @memberof EulerAngles
      */
-    static fromRotationMatrix(m: RotationMatrix): EulerAngles;
+    static fromRotationMatrix(m: Matrix4): EulerAngles;
     /**
      * 物体——世界四元数转换为欧拉角
      *

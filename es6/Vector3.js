@@ -125,6 +125,22 @@ class Vector3 {
         return new Vector3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
     }
     /**
+     * Vector3 乘 Matrix4
+     *
+     * @static
+     * @param {Vector3} v
+     * @param {Matrix4} m
+     * @returns {Vector3}
+     * @memberof Matrix4
+     */
+    static vector3Multiply(v, m) {
+        let tw = v.x * m.m14 + v.y * m.m24 + v.z * m.m34 + m.tw;
+        if (tw === 0) {
+            throw Error('Vector3 W = 0 ERROR!');
+        }
+        return new Vector3((v.x * m.m11 + v.y * m.m21 + v.z * m.m31 + m.tx) / tw, (v.x * m.m12 + v.y * m.m22 + v.z * m.m32 + m.ty) / tw, (v.x * m.m13 + v.y * m.m23 + v.z * m.m33 + m.tz) / tw);
+    }
+    /**
      * normalize 向量标准化
      *
      * @memberof Vector3

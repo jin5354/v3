@@ -1,5 +1,5 @@
 import Quaternion from './Quaternion'
-import RotationMatrix from './RotationMatrix'
+import Matrix4 from './Matrix4'
 import * as MathUtil from './MathUtil'
 
 /**
@@ -23,10 +23,10 @@ class EulerAngles {
    * 从世界——物体旋转矩阵中提取欧拉角
    *
    * @static
-   * @param {RotationMatrix} m
+   * @param {Matrix4} m
    * @memberof EulerAngles
    */
-  static fromRotationMatrix(m: RotationMatrix): EulerAngles {
+  static fromRotationMatrix(m: Matrix4): EulerAngles {
     let heading: number
     let picth: number
     let bank: number
