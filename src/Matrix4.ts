@@ -25,7 +25,7 @@ class Matrix4 {
   tz: number
   tw: number
 
-  constructor(m11: number = 0, m12: number = 0, m13: number = 0, m14: number = 0, m21: number = 0, m22: number = 0, m23: number = 0, m24: number = 0, m31: number = 0, m32: number = 0, m33: number = 0, m34: number = 0, tx: number = 0, ty: number = 0, tz: number = 0, tw: number = 0) {
+  constructor(m11: number = 1, m12: number = 0, m13: number = 0, m14: number = 0, m21: number = 0, m22: number = 1, m23: number = 0, m24: number = 0, m31: number = 0, m32: number = 0, m33: number = 1, m34: number = 0, tx: number = 0, ty: number = 0, tz: number = 0, tw: number = 1) {
     this.m11 = m11
     this.m12 = m12
     this.m13 = m13
