@@ -161,10 +161,10 @@ class Matrix4 {
         a.m31 * b.m12 + a.m32 * b.m22 + a.m33 * b.m32 + a.m34 * b.ty,
         a.m31 * b.m13 + a.m32 * b.m23 + a.m33 * b.m33 + a.m34 * b.tz,
         a.m31 * b.m14 + a.m32 * b.m24 + a.m33 * b.m34 + a.m34 * b.tw,
-        a.tx * b.m11 + a.ty * b.m21 + a.tz * b.m31 + b.tx + a.tw * b.tx,
-        a.tx * b.m12 + a.ty * b.m22 + a.tz * b.m32 + b.ty + a.tw * b.ty,
-        a.tx * b.m13 + a.ty * b.m23 + a.tz * b.m33 + b.tz + a.tw * b.tz,
-        a.tx * b.m14 + a.ty * b.m24 + a.tz * b.m34 + b.tz + a.tw * b.tw
+        a.tx * b.m11 + a.ty * b.m21 + a.tz * b.m31 + a.tw * b.tx,
+        a.tx * b.m12 + a.ty * b.m22 + a.tz * b.m32 + a.tw * b.ty,
+        a.tx * b.m13 + a.ty * b.m23 + a.tz * b.m33 + a.tw * b.tz,
+        a.tx * b.m14 + a.ty * b.m24 + a.tz * b.m34 + a.tw * b.tw
       )
     })
   }
