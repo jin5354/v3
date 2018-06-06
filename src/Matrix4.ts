@@ -1,6 +1,4 @@
 import Vector3 from './Vector3'
-import RotationMatrix from './RotationMatrix'
-import Matrix4x3 from './Matrix4x3'
 import EulerAngles from './EulerAngles'
 import Quaternion from './Quaternion'
 
@@ -72,7 +70,7 @@ class Matrix4 {
    * @returns {RotationMatrix}
    * @memberof Matrix4
    */
-  static fromEulerAngle(orientation: EulerAngles): RotationMatrix {
+  static fromEulerAngle(orientation: EulerAngles): Matrix4 {
     let sinH = Math.sin(orientation.heading)
     let cosH = Math.cos(orientation.heading)
     let sinP = Math.sin(orientation.picth)
@@ -90,7 +88,7 @@ class Matrix4 {
     let m32 = sinB * sinH + cosH * sinP * cosB
     let m33 = cosH * cosP
 
-    return new RotationMatrix(m11, m12, m13, m21, m22, m23, m31, m32, m33)
+    return new Matrix4(m11, m12, m13, 0, m21, m22, m23, 0, m31, m32, m33, 0, 0, 0, 0, 1)
   }
 
   /**
@@ -101,7 +99,7 @@ class Matrix4 {
    * @returns {RotationMatrix}
    * @memberof Matrix4
    */
-  static fromWorldToObjectQuaternion(q: Quaternion): RotationMatrix {
+  static fromWorldToObjectQuaternion(q: Quaternion): Matrix4 {
     let m11 = 1 - 2 * q.y * q.y - 2 * q.z * q.z
     let m12 = 2 * q.x * q.y + 2 * q.w * q.z
     let m13 = 2 * q.x * q.z - 2 * q.w * q.y
@@ -112,7 +110,7 @@ class Matrix4 {
     let m32 = 2 * q.y * q.z - 2 * q.w * q.x
     let m33 = 1 - 2 * q.x * q.x - 2 * q.y * q.y
 
-    return new RotationMatrix(m11, m12, m13, m21, m22, m23, m31, m32, m33)
+    return new Matrix4(m11, m12, m13, 0, m21, m22, m23, 0, m31, m32, m33, 0, 0, 0, 0, 1)
   }
 
   /**
@@ -123,7 +121,7 @@ class Matrix4 {
    * @returns {RotationMatrix}
    * @memberof Matrix4
    */
-  static fromObjectToWorldQuaternion(q: Quaternion): RotationMatrix {
+  static fromObjectToWorldQuaternion(q: Quaternion): Matrix4 {
     let m11 = 1 - 2 * q.y * q.y - 2 * q.z * q.z
     let m12 = 2 * q.x * q.y - 2 * q.w * q.z
     let m13 = 2 * q.x * q.z + 2 * q.w * q.y
@@ -134,28 +132,7 @@ class Matrix4 {
     let m32 = 2 * q.y * q.z + 2 * q.w * q.x
     let m33 = 1 - 2 * q.x * q.x - 2 * q.y * q.y
 
-    return new RotationMatrix(m11, m12, m13, m21, m22, m23, m31, m32, m33)
-  }
-
-  /**
-   * Vector3 乘 Matrix4
-   *
-   * @static
-   * @param {Vector3} v
-   * @param {Matrix4} m
-   * @returns {Vector3}
-   * @memberof Matrix4
-   */
-  static vector3Multiply(v: Vector3, m: Matrix4): Vector3 {
-    let tw = v.x * m.m14 + v.y * m.m24 + v.z * m.m34 + m.tw
-    if(tw === 0) {
-      throw Error('Vector3 W = 0 ERROR!')
-    }
-    return new Vector3(
-      (v.x * m.m11 + v.y * m.m21 + v.z * m.m31 + m.tx) / tw,
-      (v.x * m.m12 + v.y * m.m22 + v.z * m.m32 + m.ty) / tw,
-      (v.x * m.m13 + v.y * m.m23 + v.z * m.m33 + m.tz) / tw
-    )
+    return new Matrix4(m11, m12, m13, 0, m21, m22, m23, 0, m31, m32, m33, 0, 0, 0, 0, 1)
   }
 
   /**
@@ -193,7 +170,28 @@ class Matrix4 {
   }
 
   /**
-   * 置为单位矩阵
+   * 标量乘法（实例属性）
+   *
+   * @param {number} scalar
+   * @memberof Matrix4
+   */
+  scalarMultiply(scalar: number): void {
+    this.cloneFrom(Matrix4.scalarMultiply(scalar, this))
+  }
+
+  /**
+   * 矩阵叉乘（实例属性）
+   *
+   * @param {...Matrix4[]} args
+   * @returns {Matrix4}
+   * @memberof Matrix4
+   */
+  matrix4Multiply(...args: Matrix4[]): void {
+    this.cloneFrom(Matrix4.matrix4Multiply(this, ...args))
+  }
+
+  /**
+   * 置为单位矩阵（实例属性）
    *
    * @memberof Matrix4
    */
@@ -226,26 +224,19 @@ class Matrix4 {
   }
 
   /**
-   * 根据向量设置平移部分
+   * 设置平移
    *
    * @param {Vector3} v
    * @memberof Matrix4
    */
   setTranslation(v: Vector3): void {
-    this.tx = v.x
-    this.ty = v.y
-    this.tz = v.z
-  }
-
-  /**
-   * 根据向量构建平移矩阵
-   *
-   * @param {Vector3} v
-   * @memberof Matrix4
-   */
-  setupTranslation(v: Vector3): void {
-    this.identity()
-    this.setTranslation(v)
+    let tMat4 = new Matrix4(
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      v.x, v.y, v.z, 1
+    )
+    this.matrix4Multiply(tMat4)
   }
 
   /**
@@ -255,9 +246,9 @@ class Matrix4 {
    * @param {EulerAngles} orientation
    * @memberof Matrix4
    */
-  setupLocalToParentFromEulerAngle(pos: Vector3, orientation: EulerAngles): void {
+  setLocalToParentFromEulerAngle(pos: Vector3, orientation: EulerAngles): void {
     let orientationMatrix = Matrix4.fromEulerAngle(orientation)
-    this.setupLocalToParentFromRotationMatrix(pos, orientationMatrix)
+    this.setLocalToParentFromRotationMatrix(pos, orientationMatrix)
   }
 
   /**
@@ -267,7 +258,7 @@ class Matrix4 {
    * @param {RotationMatrix} orientation
    * @memberof Matrix4
    */
-  setupLocalToParentFromRotationMatrix(pos: Vector3, orientation: RotationMatrix): void {
+  setLocalToParentFromRotationMatrix(pos: Vector3, orientation: Matrix4): void {
     this.m11 = orientation.m11
     this.m12 = orientation.m12
     this.m13 = orientation.m13
@@ -293,9 +284,9 @@ class Matrix4 {
    * @param {EulerAngles} orientation
    * @memberof Matrix4
    */
-  setupParentToLocalFromEulerAngle(pos: Vector3, orientation: EulerAngles): void {
+  setParentToLocalFromEulerAngle(pos: Vector3, orientation: EulerAngles): void {
     let orientationMatrix = Matrix4.fromEulerAngle(orientation)
-    this.setupParentToLocalFromRotationMatrix(pos, orientationMatrix)
+    this.setParentToLocalFromRotationMatrix(pos, orientationMatrix)
   }
 
   /**
@@ -305,7 +296,7 @@ class Matrix4 {
    * @param {RotationMatrix} orientation
    * @memberof Matrix4
    */
-  setupParentToLocalFromRotationMatrix(pos: Vector3, orientation: RotationMatrix): void {
+  setParentToLocalFromRotationMatrix(pos: Vector3, orientation: Matrix4): void {
     this.m11 = orientation.m11
     this.m12 = orientation.m12
     this.m13 = orientation.m13
@@ -331,65 +322,68 @@ class Matrix4 {
    * @param {number} theta
    * @memberof Matrix4
    */
-  setupRotateFromXYZAxis(axis: string, theta: number): void {
+  setRotateFromXYZAxis(axis: string, theta: number): void {
     let sin: number = Math.sin(theta)
     let cos: number = Math.cos(theta)
+    let resultMat4 = new Matrix4()
 
     switch(axis) {
       case('x'):
       case('X'): {
-        this.m11 = 1
-        this.m12 = 0
-        this.m13 = 0
-        this.m14 = 0
-        this.m21 = 0
-        this.m22 = cos
-        this.m23 = sin
-        this.m24 = 0
-        this.m31 = 0
-        this.m32 = -sin
-        this.m33 = cos
-        this.m34 = 0
+        resultMat4.m11 = 1
+        resultMat4.m12 = 0
+        resultMat4.m13 = 0
+        resultMat4.m14 = 0
+        resultMat4.m21 = 0
+        resultMat4.m22 = cos
+        resultMat4.m23 = sin
+        resultMat4.m24 = 0
+        resultMat4.m31 = 0
+        resultMat4.m32 = -sin
+        resultMat4.m33 = cos
+        resultMat4.m34 = 0
         break
       }
       case('y'):
       case('Y'): {
-        this.m11 = cos
-        this.m12 = 0
-        this.m13 = -sin
-        this.m14 = 0
-        this.m21 = 0
-        this.m22 = 1
-        this.m23 = 0
-        this.m24 = 0
-        this.m31 = sin
-        this.m32 = 0
-        this.m33 = cos
-        this.m34 = 0
+        resultMat4.m11 = cos
+        resultMat4.m12 = 0
+        resultMat4.m13 = -sin
+        resultMat4.m14 = 0
+        resultMat4.m21 = 0
+        resultMat4.m22 = 1
+        resultMat4.m23 = 0
+        resultMat4.m24 = 0
+        resultMat4.m31 = sin
+        resultMat4.m32 = 0
+        resultMat4.m33 = cos
+        resultMat4.m34 = 0
         break
       }
       case('z'):
       case('Z'): {
-        this.m11 = cos
-        this.m12 = sin
-        this.m13 = 0
-        this.m14 = 0
-        this.m21 = -sin
-        this.m22 = cos
-        this.m23 = 0
-        this.m24 = 0
-        this.m31 = 0
-        this.m32 = 0
-        this.m33 = 1
-        this.m34 = 0
+        resultMat4.m11 = cos
+        resultMat4.m12 = sin
+        resultMat4.m13 = 0
+        resultMat4.m14 = 0
+        resultMat4.m21 = -sin
+        resultMat4.m22 = cos
+        resultMat4.m23 = 0
+        resultMat4.m24 = 0
+        resultMat4.m31 = 0
+        resultMat4.m32 = 0
+        resultMat4.m33 = 1
+        resultMat4.m34 = 0
         break
       }
     }
 
-    this.tx = 0
-    this.ty = 0
-    this.tz = 0
-    this.tw = 1
+    resultMat4.tx = 0
+    resultMat4.ty = 0
+    resultMat4.tz = 0
+    resultMat4.tw = 1
+
+    this.matrix4Multiply(resultMat4)
   }
 
   /**
@@ -399,7 +393,7 @@ class Matrix4 {
    * @param {number} theta
    * @memberof Matrix4
    */
-  setupRotateFromVector3(axis: Vector3, theta: number): void {
+  setRotateFromVector3(axis: Vector3, theta: number): void {
     if(Math.abs(Vector3.getNorm(axis) - 1) > 0.01) {
       throw Error('旋转轴向量应为单位向量!')
     }
@@ -410,23 +404,26 @@ class Matrix4 {
     let ax: number = a * axis.x
     let ay: number = a * axis.y
     let az: number = a * axis.z
+    let resultMat4 = new Matrix4()
 
-    this.m11 = ax * axis.x + cos
-    this.m12 = ax * axis.y + axis.z * sin
-    this.m13 = ax * axis.z - axis.y * sin
-    this.m14 = 0
-    this.m21 = ay * axis.x - axis.z * sin
-    this.m22 = ay * axis.y + cos
-    this.m23 = ay * axis.z + axis.x * sin
-    this.m24 = 0
-    this.m31 = az * axis.x + axis.y * sin
-    this.m32 = az * axis.y - axis.x * sin
-    this.m33 = az * axis.z + cos
-    this.m34 = 0
-    this.tx = 0
-    this.ty = 0
-    this.tz = 0
-    this.tw = 1
+    resultMat4.m11 = ax * axis.x + cos
+    resultMat4.m12 = ax * axis.y + axis.z * sin
+    resultMat4.m13 = ax * axis.z - axis.y * sin
+    resultMat4.m14 = 0
+    resultMat4.m21 = ay * axis.x - axis.z * sin
+    resultMat4.m22 = ay * axis.y + cos
+    resultMat4.m23 = ay * axis.z + axis.x * sin
+    resultMat4.m24 = 0
+    resultMat4.m31 = az * axis.x + axis.y * sin
+    resultMat4.m32 = az * axis.y - axis.x * sin
+    resultMat4.m33 = az * axis.z + cos
+    resultMat4.m34 = 0
+    resultMat4.tx = 0
+    resultMat4.ty = 0
+    resultMat4.tz = 0
+    resultMat4.tw = 1
+
+    this.matrix4Multiply(resultMat4)
   }
 
   /**
@@ -435,22 +432,26 @@ class Matrix4 {
    * @param {Vector3} v
    * @memberof Matrix4
    */
-  setupScale(v: Vector3): void {
-    this.m11 = v.x
-    this.m12 = 0
-    this.m13 = 0
-    this.m21 = 0
-    this.m22 = v.y
-    this.m23 = 0
-    this.m31 = 0
-    this.m32 = 0
-    this.m33 = v.z
-    this.tx = 0
-    this.ty = 0
-    this.tz = 0
+  setScale(v: Vector3): void {
+    let resultMat4 = new Matrix4()
 
-    this.m14 = this.m24 = this.m34 = 0
-    this.tw = 1
+    resultMat4.m11 = v.x
+    resultMat4.m12 = 0
+    resultMat4.m13 = 0
+    resultMat4.m21 = 0
+    resultMat4.m22 = v.y
+    resultMat4.m23 = 0
+    resultMat4.m31 = 0
+    resultMat4.m32 = 0
+    resultMat4.m33 = v.z
+    resultMat4.tx = 0
+    resultMat4.ty = 0
+    resultMat4.tz = 0
+
+    resultMat4.m14 = resultMat4.m24 = resultMat4.m34 = 0
+    resultMat4.tw = 1
+
+    this.matrix4Multiply(resultMat4)
   }
 
   /**
@@ -460,7 +461,7 @@ class Matrix4 {
    * @param {number} k
    * @memberof Matrix4
    */
-  setupScaleFromAxis(axis: Vector3, k: number): void {
+  setScaleFromAxis(axis: Vector3, k: number): void {
     if(Math.abs(Vector3.getNorm(axis) - 1) > 0.01) {
       throw Error('旋转轴向量应为单位向量!')
     }
@@ -469,17 +470,20 @@ class Matrix4 {
     let ax = a * axis.x
     let ay = a * axis.y
     let az = a * axis.z
+    let resultMat4 = new Matrix4()
 
-    this.m11 = ax * axis.x + 1
-    this.m22 = ay * axis.y + 1
-    this.m33 = az * axis.z + 1
-    this.m12 = this.m21 = ax * axis.y
-    this.m13 = this.m31 = ax * axis.z
-    this.m23 = this.m32 = ay * axis.z
-    this.tx = this.ty = this.tz = 0
+    resultMat4.m11 = ax * axis.x + 1
+    resultMat4.m22 = ay * axis.y + 1
+    resultMat4.m33 = az * axis.z + 1
+    resultMat4.m12 = resultMat4.m21 = ax * axis.y
+    resultMat4.m13 = resultMat4.m31 = ax * axis.z
+    resultMat4.m23 = resultMat4.m32 = ay * axis.z
+    resultMat4.tx = resultMat4.ty = resultMat4.tz = 0
 
-    this.m14 = this.m24 = this.m34 = 0
-    this.tw = 1
+    resultMat4.m14 = resultMat4.m24 = resultMat4.m34 = 0
+    resultMat4.tw = 1
+
+    this.matrix4Multiply(resultMat4)
   }
 
   /**
@@ -490,52 +494,55 @@ class Matrix4 {
    * @param {number} t
    * @memberof Matrix4
    */
-  setupShear(axis: string, s: number, t: number): void {
+  setShear(axis: string, s: number, t: number): void {
+    let resultMat4 = new Matrix4()
     switch(axis) {
       case('x'):
       case('X'): {
-        this.m11 = 1
-        this.m12 = 0
-        this.m13 = 0
-        this.m21 = 0
-        this.m22 = 1
-        this.m23 = 0
-        this.m31 = s
-        this.m32 = t
-        this.m33 = 1
+        resultMat4.m11 = 1
+        resultMat4.m12 = 0
+        resultMat4.m13 = 0
+        resultMat4.m21 = 0
+        resultMat4.m22 = 1
+        resultMat4.m23 = 0
+        resultMat4.m31 = s
+        resultMat4.m32 = t
+        resultMat4.m33 = 1
         break
       }
       case('y'):
       case('Y'): {
-        this.m11 = 1
-        this.m12 = 0
-        this.m13 = 0
-        this.m21 = s
-        this.m22 = 1
-        this.m23 = t
-        this.m31 = 0
-        this.m32 = 0
-        this.m33 = 1
+        resultMat4.m11 = 1
+        resultMat4.m12 = 0
+        resultMat4.m13 = 0
+        resultMat4.m21 = s
+        resultMat4.m22 = 1
+        resultMat4.m23 = t
+        resultMat4.m31 = 0
+        resultMat4.m32 = 0
+        resultMat4.m33 = 1
         break
       }
       case('z'):
       case('Z'): {
-        this.m11 = 1
-        this.m12 = s
-        this.m13 = t
-        this.m21 = 0
-        this.m22 = 1
-        this.m23 = 0
-        this.m31 = 0
-        this.m32 = 0
-        this.m33 = 1
+        resultMat4.m11 = 1
+        resultMat4.m12 = s
+        resultMat4.m13 = t
+        resultMat4.m21 = 0
+        resultMat4.m22 = 1
+        resultMat4.m23 = 0
+        resultMat4.m31 = 0
+        resultMat4.m32 = 0
+        resultMat4.m33 = 1
         break
       }
     }
-    this.tx = this.ty = this.tx = 0
+    resultMat4.tx = resultMat4.ty = resultMat4.tx = 0
 
-    this.m14 = this.m24 = this.m34 = 0
-    this.tw = 1
+    resultMat4.m14 = resultMat4.m24 = resultMat4.m34 = 0
+    resultMat4.tw = 1
+
+    this.matrix4Multiply(resultMat4)
   }
 
   /**
@@ -544,7 +551,7 @@ class Matrix4 {
    * @param {Vector3} n
    * @memberof Matrix4x3
    */
-  setupReflection(n: Vector3): void {
+  setReflection(n: Vector3): void {
     if(Math.abs(Vector3.getNorm(n) - 1) > 0.01) {
       throw Error('反射平面法向量应为单位向量!')
     }
@@ -552,17 +559,20 @@ class Matrix4 {
     let ax = -2 * n.x
     let ay = -2 * n.y
     let az = -2 * n.z
+    let resultMat4 = new Matrix4()
 
-    this.m11 = 1 + ax * n.x
-    this.m22 = 1 + ay * n.y
-    this.m33 = 1 + az * n.z
-    this.m12 = this.m21 = ax * n.y
-    this.m13 = this.m31 = ax * n.z
-    this.m23 = this.m32 = ay * n.z
-    this.tx = this.ty = this.tz = 0
+    resultMat4.m11 = 1 + ax * n.x
+    resultMat4.m22 = 1 + ay * n.y
+    resultMat4.m33 = 1 + az * n.z
+    resultMat4.m12 = resultMat4.m21 = ax * n.y
+    resultMat4.m13 = resultMat4.m31 = ax * n.z
+    resultMat4.m23 = resultMat4.m32 = ay * n.z
+    resultMat4.tx = resultMat4.ty = resultMat4.tz = 0
 
-    this.m14 = this.m24 = this.m34 = 0
-    this.tw = 1
+    resultMat4.m14 = resultMat4.m24 = resultMat4.m34 = 0
+    resultMat4.tw = 1
+
+    this.matrix4Multiply(resultMat4)
   }
 
   /**
@@ -608,6 +618,7 @@ class Matrix4 {
    * @memberof Matrix4
    */
   setLookAt(eye: Vector3, center: Vector3, up: Vector3): void {
+    let resultMat4 = new Matrix4()
     // 构建新坐标轴
     // z轴 = eye - center
     let z: Vector3 = Vector3.plus(eye, Vector3.negate(center))
@@ -618,14 +629,15 @@ class Matrix4 {
     x.normalize()
 
     // 构建旋转矩阵
-    let rMatrix = new RotationMatrix(
-      ...x,
-      ...y,
-      ...z
+    let rMatrix = new Matrix4(
+      ...x, 0,
+      ...y, 0,
+      ...z, 0,
+      0, 0, 0, 1
     )
 
     // 构建平移矩阵
-    let tMatrix = new Matrix4x3()
+    let tMatrix = new Matrix4()
     tMatrix.identity()
     tMatrix.setTranslation(eye)
 
@@ -637,22 +649,24 @@ class Matrix4 {
     rMatrix.transpose()
     let composedMatrix = Matrix4.matrix4Multiply(tMatrix, rMatrix)
 
-    this.m11 = composedMatrix.m11
-    this.m12 = composedMatrix.m12
-    this.m13 = composedMatrix.m13
-    this.m14 = composedMatrix.m14
-    this.m21 = composedMatrix.m21
-    this.m22 = composedMatrix.m22
-    this.m23 = composedMatrix.m23
-    this.m24 = composedMatrix.m24
-    this.m31 = composedMatrix.m31
-    this.m32 = composedMatrix.m32
-    this.m33 = composedMatrix.m33
-    this.m34 = composedMatrix.m34
-    this.tx = composedMatrix.tx
-    this.ty = composedMatrix.ty
-    this.tz = composedMatrix.tz
-    this.tw = composedMatrix.tw
+    resultMat4.m11 = composedMatrix.m11
+    resultMat4.m12 = composedMatrix.m12
+    resultMat4.m13 = composedMatrix.m13
+    resultMat4.m14 = composedMatrix.m14
+    resultMat4.m21 = composedMatrix.m21
+    resultMat4.m22 = composedMatrix.m22
+    resultMat4.m23 = composedMatrix.m23
+    resultMat4.m24 = composedMatrix.m24
+    resultMat4.m31 = composedMatrix.m31
+    resultMat4.m32 = composedMatrix.m32
+    resultMat4.m33 = composedMatrix.m33
+    resultMat4.m34 = composedMatrix.m34
+    resultMat4.tx = composedMatrix.tx
+    resultMat4.ty = composedMatrix.ty
+    resultMat4.tz = composedMatrix.tz
+    resultMat4.tw = composedMatrix.tw
+
+    this.matrix4Multiply(resultMat4)
   }
 
   /**
@@ -667,25 +681,29 @@ class Matrix4 {
    * @memberof Matrix4
    */
   setOrtho(left: number, right: number, bottom: number, top: number, near: number, far: number): void {
+    let resultMat4 = new Matrix4()
+
     // 构建正射投影矩阵
     // 默认可视空间是 x: -1 ~ 1, y: -1 ~ 1, z: -1 ~ 1
     // http://www.cnblogs.com/yiyezhai/archive/2012/09/12/2677902.html
-    this.m11 = 2 / (right - left)
-    this.m12 = 0
-    this.m13 = 0
-    this.m14 = 0
-    this.m21 = 0
-    this.m22 = 2 / (top - bottom)
-    this.m23 = 0
-    this.m24 = 0
-    this.m31 = 0
-    this.m32 = 0
-    this.m33 = - 2 / (far - near)
-    this.m34 = 0
-    this.tx = - (right + left) / (right - left)
-    this.ty = - (top + bottom) / (top - bottom)
-    this.tz = - (far + near) / (far - near)
-    this.tw = 1
+    resultMat4.m11 = 2 / (right - left)
+    resultMat4.m12 = 0
+    resultMat4.m13 = 0
+    resultMat4.m14 = 0
+    resultMat4.m21 = 0
+    resultMat4.m22 = 2 / (top - bottom)
+    resultMat4.m23 = 0
+    resultMat4.m24 = 0
+    resultMat4.m31 = 0
+    resultMat4.m32 = 0
+    resultMat4.m33 = - 2 / (far - near)
+    resultMat4.m34 = 0
+    resultMat4.tx = - (right + left) / (right - left)
+    resultMat4.ty = - (top + bottom) / (top - bottom)
+    resultMat4.tz = - (far + near) / (far - near)
+    resultMat4.tw = 1
+
+    this.matrix4Multiply(resultMat4)
   }
 
   /**
@@ -698,28 +716,57 @@ class Matrix4 {
    * @memberof Matrix4
    */
   setPerspective(fov: number, aspect: number, near: number, far: number): void {
+    let resultMat4 = new Matrix4()
+
     // 构建透视投影矩阵
     // 默认可视空间是 x: -1 ~ 1, y: -1 ~ 1, z: -1 ~ 1
     // 推导过程 https://stackoverflow.com/questions/28286057/trying-to-understand-the-math-behind-the-perspective-matrix-in-webgl/28301213#28301213 写的贼好
     let f = Math.tan(Math.PI / 2 - fov / 2)
     let rangeInv = 1 / (near - far)
 
-    this.m11 = f / aspect
-    this.m12 = 0
-    this.m13 = 0
-    this.m14 = 0
-    this.m21 = 0
-    this.m22 = f
-    this.m23 = 0
-    this.m24 = 0
-    this.m31 = 0
-    this.m32 = 0
-    this.m33 = rangeInv * (near + far)
-    this.m34 = -1
-    this.tx = 0
-    this.ty = 0
-    this.tz = 2 * near * far * rangeInv
-    this.tw = 0
+    resultMat4.m11 = f / aspect
+    resultMat4.m12 = 0
+    resultMat4.m13 = 0
+    resultMat4.m14 = 0
+    resultMat4.m21 = 0
+    resultMat4.m22 = f
+    resultMat4.m23 = 0
+    resultMat4.m24 = 0
+    resultMat4.m31 = 0
+    resultMat4.m32 = 0
+    resultMat4.m33 = rangeInv * (near + far)
+    resultMat4.m34 = -1
+    resultMat4.tx = 0
+    resultMat4.ty = 0
+    resultMat4.tz = 2 * near * far * rangeInv
+    resultMat4.tw = 0
+
+    this.matrix4Multiply(resultMat4)
+  }
+
+  /**
+   * 克隆矩阵
+   *
+   * @param {Matrix4} target
+   * @memberof Matrix4
+   */
+  cloneFrom(target: Matrix4): void {
+    this.m11 = target.m11
+    this.m12 = target.m12
+    this.m13 = target.m13
+    this.m14 = target.m14
+    this.m21 = target.m21
+    this.m22 = target.m22
+    this.m23 = target.m23
+    this.m24 = target.m24
+    this.m31 = target.m31
+    this.m32 = target.m32
+    this.m33 = target.m33
+    this.m34 = target.m34
+    this.tx = target.tx
+    this.ty = target.ty
+    this.tz = target.tz
+    this.tw = target.tw
   }
 
   /**
