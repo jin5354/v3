@@ -5,6 +5,8 @@
 
 3D 函数操作集
 
+**Under heavy development**
+
 Repo: [https://github.com/jin5354/v3](https://github.com/jin5354/v3)
 
 Doc: [https://jin5354.github.io/v3/](https://jin5354.github.io/v3/)
@@ -26,8 +28,7 @@ import { Vector3, EulerAngles, Matrix4x3, RotationMatrix, Quaternion } from 'v3j
 - Vector3 三维向量
 - EulerAngles 欧拉角
 - Quaternion 四元数
-- RotationMatrix 旋转矩阵
-- Matrix4x3 4x3 矩阵
+- Matrix4 矩阵
 
 # license
 MIT
