@@ -576,6 +576,46 @@ class Matrix4 {
   }
 
   /**
+   * 矩阵求逆
+   *
+   * @memberof Matrix4
+   */
+  inverse(): void {
+    let result = new Matrix4()
+    let det: number
+
+    result.m11 = this.m22 * this.m33 * this.tw - this.m22 * this.m34 * this.tz - this.m32 * this.m23 * this.tw + this.m32 * this.m24 * this.tz + this.ty * this.m23 * this.m34 - this.ty * this.m24 * this.m33
+    result.m21 = - this.m21 * this.m33 * this.tw + this.m21 * this.m34 * this.tz + this.m31 * this.m23 * this.tw - this.m31 * this.m24 * this.tz - this.tx * this.m23 * this.m34 + this.tx * this.m24 * this.m33
+    result.m31 = this.m21 * this.m32 * this.tw - this.m21 * this.m34 * this.ty - this.m31 * this.m22 * this.tw + this.m31 * this.m24 * this.ty + this.tx * this.m22 * this.m34 - this.tx * this.m24 * this.m32
+    result.tx = - this.m21 * this.m32 * this.tz + this.m21 * this.m33 * this.ty + this.m31 * this.m22 * this.tz - this.m31 * this.m23 * this.ty - this.tx * this.m22 * this.m33 + this.tx * this.m23 * this.m32
+
+    result.m12 = - this.m12 * this.m33 * this.tw + this.m12 * this.m34 * this.tz + this.m32 * this.m13 * this.tw - this.m32 * this.m14 * this.tz - this.ty * this.m13 * this.m34 + this.ty * this.m14 * this.m33
+    result.m22 = this.m11 * this.m33 * this.tw - this.m11 * this.m34 * this.tz - this.m31 * this.m13 * this.tw + this.m31 * this.m14 * this.tz + this.tx * this.m13 * this.m34 - this.tx * this.m14 * this.m33
+    result.m32 = - this.m11 * this.m32 * this.tw + this.m11 * this.m34 * this.ty + this.m31 * this.m12 * this.tw - this.m31 * this.m14 * this.ty - this.tx * this.m12 * this.m34 + this.tx * this.m14 * this.m32
+    result.ty = this.m11 * this.m32 * this.tz - this.m11 * this.m33 * this.ty - this.m31 * this.m12 * this.tz + this.m31 * this.m13 * this.ty + this.tx * this.m12 * this.m33 - this.tx * this.m13 * this.m32
+
+    result.m13 = this.m12 * this.m23 * this.tw - this.m12 * this.m24 * this.tz - this.m22 * this.m13 * this.tw + this.m22 * this.m14 * this.tz + this.ty * this.m13 * this.m24 - this.ty * this.m14 * this.m23
+    result.m23 = - this.m11 * this.m23 * this.tw + this.m11 * this.m24 * this.tz + this.m21 * this.m13 * this.tw - this.m21 * this.m14 * this.tz - this.tx * this.m13 * this.m24 + this.tx * this.m14 * this.m23
+    result.m33 = this.m11 * this.m22 * this.tw - this.m11 * this.m24 * this.ty - this.m21 * this.m12 * this.tw + this.m21 * this.m14 * this.ty + this.tx * this.m12 * this.m24 - this.tx * this.m14 * this.m22
+    result.tz = - this.m11 * this.m22 * this.tz + this.m11 * this.m23 * this.ty + this.m21 * this.m12 * this.tz - this.m21 * this.m13 * this.ty - this.tx * this.m12 * this.m23 + this.tx * this.m13 * this.m22
+
+    result.m14 = - this.m12 * this.m23 * this.m34 + this.m12 * this.m24 * this.m33 + this.m22 * this.m13 * this.m34 - this.m22 * this.m14 * this.m33 - this.m32 * this.m13 * this.m24 + this.m32 * this.m14 * this.m23
+    result.m24 = this.m11 * this.m23 * this.m34 - this.m11 * this.m24 * this.m33 - this.m21 * this.m13 * this.m34 + this.m21 * this.m14 * this.m33 + this.m31 * this.m13 * this.m24 - this.m31 * this.m14 * this.m23
+    result.m34 = - this.m11 * this.m22 * this.m34 + this.m11 * this.m24 * this.m32 + this.m21 * this.m12 * this.m34 - this.m21 * this.m14 * this.m32 - this.m31 * this.m12 * this.m24 + this.m31 * this.m14 * this.m22
+    result.tw = this.m11 * this.m22 * this.m33 - this.m11 * this.m23 * this.m32 - this.m21 * this.m12 * this.m33 + this.m21 * this.m13 * this.m32 + this.m31 * this.m12 * this.m23 - this.m31 * this.m13 * this.m22
+
+    det = this.m11 * result.m11 + this.m12 * result.m21 + this.m13 * result.m31 + this.m14 * result.tx
+    if (det === 0) {
+      this.cloneFrom(result)
+      return
+    }
+
+    det = 1 / det
+    result.scalarMultiply(det)
+    this.cloneFrom(result)
+  }
+
+  /**
    * 矩阵转置
    *
    * @memberof Matrix4
