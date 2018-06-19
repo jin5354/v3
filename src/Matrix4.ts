@@ -658,15 +658,19 @@ class Matrix4 {
    * @memberof Matrix4
    */
   setLookAt(eye: Vector3, center: Vector3, up: Vector3): void {
-    let resultMat4 = new Matrix4()
     // 构建新坐标轴
     // z轴 = eye - center
-    let z: Vector3 = Vector3.plus(eye, Vector3.negate(center))
+    let z = Vector3.plus(eye, Vector3.negate(center))
     z.normalize()
-    let y: Vector3 = up
-    y.normalize()
-    let x: Vector3 = Vector3.crossProduct(y, z)
+    up.normalize()
+    let x = Vector3.crossProduct(up, z)
     x.normalize()
+    let y = Vector3.crossProduct(x, z)
+    y.normalize()
+
+    // 构建复合矩阵，且求逆(物体绝对位置不动，是坐标轴变动了，物体相对坐标轴做反向运动)
+    // C = R*T
+    // C^-1 = T^-1*R^-1 注意：复合矩阵求逆时，其子矩阵顺序为反向，所以若要逆矩阵符合期望，计算符合矩阵时将子矩阵连接顺序反向。
 
     // 构建旋转矩阵
     let rMatrix = new Matrix4(
@@ -678,33 +682,13 @@ class Matrix4 {
 
     // 构建平移矩阵
     let tMatrix = new Matrix4()
+    tMatrix.setTranslation(eye)
 
-    // 构建复合矩阵，且求逆(物体绝对位置不动，是坐标轴变动了，物体相对坐标轴做反向运动)
-    // C = R*T
-    // C^-1 = T^-1*R^-1 正交矩阵的逆等于其转置
-    // C^-1 = T^-1 * R^t 反向平移 + 反向旋转
-    tMatrix.setTranslation(Vector3.negate(eye))
-    rMatrix.transpose()
-    let composedMatrix = Matrix4.matrix4Multiply(tMatrix, rMatrix)
+    // 为了求逆正常，这里反向相乘，旋转*平移，正常应该是先平移再旋转
+    let composedMatrix = Matrix4.matrix4Multiply(rMatrix, tMatrix)
+    composedMatrix.inverse()
 
-    resultMat4.m11 = composedMatrix.m11
-    resultMat4.m12 = composedMatrix.m12
-    resultMat4.m13 = composedMatrix.m13
-    resultMat4.m14 = composedMatrix.m14
-    resultMat4.m21 = composedMatrix.m21
-    resultMat4.m22 = composedMatrix.m22
-    resultMat4.m23 = composedMatrix.m23
-    resultMat4.m24 = composedMatrix.m24
-    resultMat4.m31 = composedMatrix.m31
-    resultMat4.m32 = composedMatrix.m32
-    resultMat4.m33 = composedMatrix.m33
-    resultMat4.m34 = composedMatrix.m34
-    resultMat4.tx = composedMatrix.tx
-    resultMat4.ty = composedMatrix.ty
-    resultMat4.tz = composedMatrix.tz
-    resultMat4.tw = composedMatrix.tw
-
-    this.matrix4Multiply(resultMat4)
+    this.matrix4Multiply(composedMatrix)
   }
 
   /**
