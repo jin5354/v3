@@ -979,6 +979,9 @@ img { max-width: 100%; }
 					<a href="_matrix4_.matrix4.html#identity" class="tsd-kind-icon">identity</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="_matrix4_.matrix4.html#inverse" class="tsd-kind-icon">inverse</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="_matrix4_.matrix4.html#matrix4multiply" class="tsd-kind-icon">matrix4<wbr>Multiply</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -1109,6 +1112,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#clonefrom" class="tsd-kind-icon">clone<wbr>From</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#getmat4floatarray" class="tsd-kind-icon">get<wbr>Mat4<wbr>Float<wbr>Array</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#identity" class="tsd-kind-icon">identity</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#inverse" class="tsd-kind-icon">inverse</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#matrix4multiply" class="tsd-kind-icon">matrix4<wbr>Multiply</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#scalarmultiply" class="tsd-kind-icon">scalar<wbr>Multiply</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_matrix4_.matrix4.html#setlocaltoparentfromeulerangle" class="tsd-kind-icon">set<wbr>Local<wbr>ToParent<wbr>From<wbr>Euler<wbr>Angle</a></li>
@@ -1148,13 +1152,13 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L26">Matrix4.ts:26</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L26">Matrix4.ts:26</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m11: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m11: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m12: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
@@ -1169,7 +1173,7 @@ img { max-width: 100%; }
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m21: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m22: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m22: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m23: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
@@ -1184,7 +1188,7 @@ img { max-width: 100%; }
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m32: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m33: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m33: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> m34: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
@@ -1199,7 +1203,7 @@ img { max-width: 100%; }
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> tz: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> tw: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> tw: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="_matrix4_.matrix4.html" class="tsd-signature-type">Matrix4</a></h4>
@@ -1215,7 +1219,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m11<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L11">Matrix4.ts:11</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L11">Matrix4.ts:11</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1225,7 +1229,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m12<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L12">Matrix4.ts:12</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L12">Matrix4.ts:12</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1235,7 +1239,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m13<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L13">Matrix4.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L13">Matrix4.ts:13</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1245,7 +1249,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m14<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L14">Matrix4.ts:14</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L14">Matrix4.ts:14</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1255,7 +1259,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m21<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L15">Matrix4.ts:15</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L15">Matrix4.ts:15</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1265,7 +1269,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m22<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L16">Matrix4.ts:16</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L16">Matrix4.ts:16</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1275,7 +1279,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m23<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L17">Matrix4.ts:17</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L17">Matrix4.ts:17</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1285,7 +1289,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m24<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L18">Matrix4.ts:18</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L18">Matrix4.ts:18</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1295,7 +1299,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m31<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L19">Matrix4.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L19">Matrix4.ts:19</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1305,7 +1309,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m32<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L20">Matrix4.ts:20</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L20">Matrix4.ts:20</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1315,7 +1319,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m33<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L21">Matrix4.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L21">Matrix4.ts:21</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1325,7 +1329,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">m34<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L22">Matrix4.ts:22</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L22">Matrix4.ts:22</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1335,7 +1339,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">tw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L26">Matrix4.ts:26</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L26">Matrix4.ts:26</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1345,7 +1349,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">tx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L23">Matrix4.ts:23</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L23">Matrix4.ts:23</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1355,7 +1359,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">ty<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L24">Matrix4.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L24">Matrix4.ts:24</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1365,7 +1369,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">tz<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L25">Matrix4.ts:25</a></li>
+						<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L25">Matrix4.ts:25</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1382,7 +1386,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L778">Matrix4.ts:778</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L800">Matrix4.ts:800</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1409,7 +1413,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L222">Matrix4.ts:222</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L222">Matrix4.ts:222</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1436,7 +1440,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L753">Matrix4.ts:753</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L775">Matrix4.ts:775</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1469,7 +1473,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L603">Matrix4.ts:603</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L643">Matrix4.ts:643</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1496,12 +1500,39 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L198">Matrix4.ts:198</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L198">Matrix4.ts:198</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>置为单位矩阵（实例属性）</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>memberof</dt>
+								<dd><p>Matrix4</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="inverse" class="tsd-anchor"></a>
+				<h3>inverse</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">inverse<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L583">Matrix4.ts:583</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>矩阵求逆</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>memberof</dt>
@@ -1523,7 +1554,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L189">Matrix4.ts:189</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L189">Matrix4.ts:189</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1556,7 +1587,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L178">Matrix4.ts:178</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L178">Matrix4.ts:178</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1589,7 +1620,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L249">Matrix4.ts:249</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L249">Matrix4.ts:249</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1625,7 +1656,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L261">Matrix4.ts:261</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L261">Matrix4.ts:261</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1661,7 +1692,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L620">Matrix4.ts:620</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L660">Matrix4.ts:660</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1700,7 +1731,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L683">Matrix4.ts:683</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L705">Matrix4.ts:705</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1748,7 +1779,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L287">Matrix4.ts:287</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L287">Matrix4.ts:287</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1784,7 +1815,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L299">Matrix4.ts:299</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L299">Matrix4.ts:299</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1820,7 +1851,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L718">Matrix4.ts:718</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L740">Matrix4.ts:740</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1862,7 +1893,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L554">Matrix4.ts:554</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L554">Matrix4.ts:554</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1895,7 +1926,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L396">Matrix4.ts:396</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L396">Matrix4.ts:396</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1931,7 +1962,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L325">Matrix4.ts:325</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L325">Matrix4.ts:325</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1967,7 +1998,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L435">Matrix4.ts:435</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L435">Matrix4.ts:435</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2000,7 +2031,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L464">Matrix4.ts:464</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L464">Matrix4.ts:464</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2036,7 +2067,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L497">Matrix4.ts:497</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L497">Matrix4.ts:497</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2075,7 +2106,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L232">Matrix4.ts:232</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L232">Matrix4.ts:232</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2108,7 +2139,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L583">Matrix4.ts:583</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L623">Matrix4.ts:623</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2135,7 +2166,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L73">Matrix4.ts:73</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L73">Matrix4.ts:73</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2170,7 +2201,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L124">Matrix4.ts:124</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L124">Matrix4.ts:124</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2205,7 +2236,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L102">Matrix4.ts:102</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L102">Matrix4.ts:102</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2240,7 +2271,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L146">Matrix4.ts:146</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L146">Matrix4.ts:146</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2275,7 +2306,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jin5354/v3/blob/ec3361e/src/Matrix4.ts#L56">Matrix4.ts:56</a></li>
+								<li>Defined in <a href="https://github.com/jin5354/v3/blob/b625e55/src/Matrix4.ts#L56">Matrix4.ts:56</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
