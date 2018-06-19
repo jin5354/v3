@@ -565,7 +565,7 @@ class Matrix4 {
         up.normalize();
         let x = Vector3.crossProduct(up, z);
         x.normalize();
-        let y = Vector3.crossProduct(x, z);
+        let y = Vector3.crossProduct(z, x);
         y.normalize();
         // 构建复合矩阵，且求逆(物体绝对位置不动，是坐标轴变动了，物体相对坐标轴做反向运动)
         // C = R*T
