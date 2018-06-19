@@ -184,6 +184,12 @@ declare class Matrix4 {
      */
     setReflection(n: Vector3): void;
     /**
+     * 矩阵求逆
+     *
+     * @memberof Matrix4
+     */
+    inverse(): void;
+    /**
      * 矩阵转置
      *
      * @memberof Matrix4
