@@ -1,6 +1,6 @@
 {
   "name": "v3js",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "description": "v3.js",
   "main": "lib/index.js",
   "module": "es/index.js",

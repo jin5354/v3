@@ -10,7 +10,7 @@ export default [{
   output: {
     file: './dist/index.js',
     format: 'umd',
-    name: 'v3js',
+    name: 'v3',
   },
   plugins: [
     typescript({
