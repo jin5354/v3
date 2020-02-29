@@ -22,7 +22,7 @@ export default [{
       }
     }),
     babel({ runtimeHelpers: true }),
-    //terser(),
+    terser(),
   ]
 }, {
   input: './src/index.ts',
