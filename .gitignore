@@ -1,5 +1,6 @@
 .history
 node_modules
 src/*.js
-es6
+es
 dist
+lib

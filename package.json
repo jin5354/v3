@@ -2,13 +2,14 @@
   "name": "v3js",
   "version": "0.5.6",
   "description": "v3.js",
-  "main": "dist/v3.min.js",
-  "module": "es6/index.js",
-  "types": "es6/index.d.ts",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "unpkg": "dist/index.js",
   "scripts": {
     "test": "tsc -d && ava test --verbose",
     "lint": "tslint src/**/* --fix",
-    "build": "NODE_ENV=production webpack --config build/webpack.config.js --colors --profile && tsc --outDir es6 -d"
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,14 @@
     "webpack-cli": "^2.1.2"
   },
   "dependencies": {
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "rollup": "^1.32.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.26.0",
     "typescript": "^2.8.1"
   }
 }

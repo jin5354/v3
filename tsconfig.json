@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-      "target": "es6",
+      "target": "es5",
       "noImplicitReturns": true,
       "noFallthroughCasesInSwitch": true,
       "noImplicitAny": true,
       "strictNullChecks": true,
-      "strictPropertyInitialization": true
+      "strictPropertyInitialization": true,
+      "downlevelIteration": true,
+      "lib": ["es5", "es6"]
   },
   "include": [
       "./src/**/*"
